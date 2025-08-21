@@ -6,7 +6,7 @@ namespace Domain.Entities;
 public class Operation
 {
     [JsonPropertyName("operation")]
-    public OperationTypeEnum OperationType { get; private set; }
+    public OperationTypeEnum OperationType { get; set; }
 
     [JsonPropertyName("unit-cost")]
     public decimal UnitCost { get; set; }

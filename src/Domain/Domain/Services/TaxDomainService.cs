@@ -15,6 +15,8 @@ public class TaxDomainService
         }
 
         // SELL
+        Console.WriteLine("Essa operação é de VENDA.");
+
         if (op.Quantity > portfolio.TotalQuantity)
             throw new InvalidOperationException("Quantidade vendida maior que a disponível.");
 
