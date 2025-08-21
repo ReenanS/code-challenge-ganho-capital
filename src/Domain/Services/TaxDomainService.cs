@@ -9,13 +9,13 @@ public class TaxDomainService
     {
         if (op.IsBuy())
         {
-            Console.WriteLine("Essa operação é de COMPRA.");
+            //Console.WriteLine("Essa operação é de COMPRA.");
             portfolio.ApplyBuy(op);
             return new TaxResult(0.00m);
         }
 
         // SELL
-        Console.WriteLine("Essa operação é de VENDA.");
+        //Console.WriteLine("Essa operação é de VENDA.");
 
         if (op.Quantity > portfolio.TotalQuantity)
             throw new InvalidOperationException("Quantidade vendida maior que a disponível.");
