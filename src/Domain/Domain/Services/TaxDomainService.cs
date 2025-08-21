@@ -7,8 +7,9 @@ public class TaxDomainService
 {
     public TaxResult Execute(Operation op, Portfolio portfolio)
     {
-        if (op.IsBuy)
+        if (op.IsBuy())
         {
+            Console.WriteLine("Essa operação é de COMPRA.");
             portfolio.ApplyBuy(op);
             return new TaxResult(0.00m);
         }

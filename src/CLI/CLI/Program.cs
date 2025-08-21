@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Domain.Services;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 class Program
 {
@@ -10,8 +11,14 @@ class Program
         string? line;
         while ((line = Console.ReadLine()) != null)
         {
-            var operations = JsonSerializer.Deserialize<List<Operation>>(line,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
+            };
+
+            var operations = JsonSerializer.Deserialize<List<Operation>>(line, options);
 
             if (operations is null) continue;
 

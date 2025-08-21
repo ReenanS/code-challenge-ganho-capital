@@ -1,18 +1,21 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Enums;
+using System.Text.Json.Serialization;
+
+namespace Domain.Entities;
 
 public class Operation
 {
-    public string OperationType { get; }
-    public decimal UnitCost { get; }
-    public int Quantity { get; }
+    [JsonPropertyName("operation")]
+    public OperationType OperationType { get; private set; }
 
-    public Operation(string operationType, decimal unitCost, int quantity)
-    {
-        OperationType = operationType.ToLowerInvariant();
-        UnitCost = unitCost;
-        Quantity = quantity;
-    }
+    [JsonPropertyName("unit-cost")]
+    public decimal UnitCost { get; private set; }
 
-    public bool IsBuy => OperationType == "buy";
-    public bool IsSell => OperationType == "sell";
+    [JsonPropertyName("quantity")]
+    public int Quantity { get; private set; }
+
+    // Métodos auxiliares para melhorar legibilidade
+    public bool IsBuy() => OperationType == OperationType.Buy;
+    public bool IsSell() => OperationType == OperationType.Sell;
+
 }
