@@ -1,8 +1,6 @@
-﻿using Xunit;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Enums;
 using Domain.Services;
-using System.Collections.Generic;
 
 namespace Tests.Domain;
 
