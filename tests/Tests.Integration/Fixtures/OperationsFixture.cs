@@ -31,7 +31,7 @@ public class OperationsFixture
         new Operation(OperationTypeEnum.Sell, 5.00m, 5000),
         new Operation(OperationTypeEnum.Sell, 20.00m, 3000)
     };
-    public decimal[] Caso3Expected => new decimal[] { 0m, 0m, 15000 };
+    public decimal[] Caso3Expected => new decimal[] { 0m, 0m, 1000m };
 
     // ---------------------- Caso 4 ----------------------
     public List<Operation> Caso4 => new()
@@ -40,7 +40,7 @@ public class OperationsFixture
         new Operation(OperationTypeEnum.Buy, 25.00m, 5000),
         new Operation(OperationTypeEnum.Sell, 15.00m, 10000)
     };
-    public decimal[] Caso4Expected => new decimal[] { 0m, 0m, 10000m };
+    public decimal[] Caso4Expected => new decimal[] { 0m, 0m, 0m };
 
     // ---------------------- Caso 5 ----------------------
     public List<Operation> Caso5 => new()
@@ -50,7 +50,7 @@ public class OperationsFixture
         new Operation(OperationTypeEnum.Sell, 15.00m, 10000),
         new Operation(OperationTypeEnum.Sell, 25.00m, 5000)
     };
-    public decimal[] Caso5Expected => new decimal[] { 0m, 0m, 10000m, 0m };
+    public decimal[] Caso5Expected => new decimal[] { 0m, 0m, 0m, 10000m };
 
     // ---------------------- Caso 6 ----------------------
     public List<Operation> Caso6 => new()
