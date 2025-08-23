@@ -17,11 +17,13 @@ public class CalculoImpostoGanhoCapitalServiceTests
         _service = new CalculoImpostoGanhoCapitalService();
     }
 
-    [Fact(DisplayName = "Deve retornar imposto zero quando a operação é de compra")]
+    /// <summary>
+    /// Deve retornar imposto zero quando a operação é de compra.
+    /// </summary>
+    [Fact(DisplayName = "Operação de compra retorna imposto zero")]
     public void Calcular_DeveRetornarZero_QuandoOperacaoEhCompra()
     {
         var operacao = new Operacao(TipoOperacaoEnum.Buy, 10m, 100);
-
         var portfolio = new Portfolio();
 
         var resultado = _service.Calcular(operacao, portfolio);
@@ -30,7 +32,10 @@ public class CalculoImpostoGanhoCapitalServiceTests
         Assert.Equal(100, portfolio.QuantidadeAcoesAtual);
     }
 
-    [Theory(DisplayName = "Testes de todos os casos de OperacoesFixture")]
+    /// <summary>
+    /// Testa diferentes cenários de operações de venda representativos.
+    /// </summary>
+    [Theory(DisplayName = "Operações de venda devem calcular imposto corretamente")]
     [MemberData(nameof(GetCasosOperacoes))]
     public void Calcular_DeveCalcularImposto_CasosDefinidos(List<Operacao> operacoes, decimal[] resultadoEsperado)
     {
@@ -39,16 +44,15 @@ public class CalculoImpostoGanhoCapitalServiceTests
 
         for (int i = 0; i < operacoes.Count; i++)
         {
-            var operacao = operacoes[i];
-
-            var resultado = _service.Calcular(operacao, portfolio);
+            var resultado = _service.Calcular(operacoes[i], portfolio);
 
             Assert.Equal(resultadoEsperado[i], resultado.Valor);
         }
     }
 
     /// <summary>
-    /// Fornece os casos de operações do OperacoesFixture para testes parametrizados.
+    /// Fornece casos representativos para testes parametrizados.
+    /// Inclui diferentes cenários de venda, prejuízo e quantidade.
     /// </summary>
     public static IEnumerable<object[]> GetCasosOperacoes()
     {

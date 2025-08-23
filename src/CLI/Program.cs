@@ -11,8 +11,8 @@ class Program
         var services = new ServiceCollection();
 
         // Registrar dependências por camada
-        services.AddDomainServices()          // Domain Layer
-                .AddApplicationServices();   // Application Layer
+        services.AddDomainServices()
+                .AddApplicationServices();
 
         // Registrar o CLI
         services.AddSingleton<GanhoCapitalCLI>();

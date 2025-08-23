@@ -1,4 +1,5 @@
 ﻿using Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Domain.Entities;
@@ -9,23 +10,62 @@ namespace Domain.Entities;
 public class Operacao
 {
 
-    /// <summary>
-    /// Se a operação é uma operação de compra (buy) ou venda (sell).
-    /// </summary>
-    [JsonPropertyName("operation")]
-    public TipoOperacaoEnum TipoOperacao { get; set; }
+    private TipoOperacaoEnum _tipoOperacao;
+    private decimal _precoUnitarioAcao;
+    private int _quantidadeAcoesNegociadas;
 
     /// <summary>
-    /// Preço unitário da ação em uma moeda com duas casas decimais.
+    /// Se a operação é do tipo compra (Buy) ou venda (Sell).
+    /// </summary>
+    [JsonPropertyName("operation")]
+    [Required]
+    public TipoOperacaoEnum TipoOperacao
+    {
+        get => _tipoOperacao;
+        set
+        {
+            if (!Enum.IsDefined(typeof(TipoOperacaoEnum), value))
+                throw new ArgumentException($"Tipo de operação inválido: {value}. Apenas 'Buy' ou 'Sell' são aceitos.");
+
+            _tipoOperacao = value;
+        }
+    }
+
+    /// <summary>
+    /// Preço unitário da ação em moeda com duas casas decimais.
+    /// Deve ser maior ou igual a zero.
     /// </summary>
     [JsonPropertyName("unit-cost")]
-    public decimal PrecoUnitarioAcao { get; set; }
+    [Range(0, double.MaxValue, ErrorMessage = "O preço unitário da ação não pode ser menor que 0.")]
+    public decimal PrecoUnitarioAcao
+    {
+        get => _precoUnitarioAcao;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(PrecoUnitarioAcao), value, "O preço unitário da ação não pode ser menor que 0.");
+
+            _precoUnitarioAcao = value;
+        }
+    }
 
     /// <summary>
     /// Quantidade de ações negociadas.
+    /// Deve ser maior ou igual a zero.
     /// </summary>
     [JsonPropertyName("quantity")]
-    public int QuantidadeAcoesNegociadas { get; set; }
+    [Range(0, int.MaxValue, ErrorMessage = "A quantidade de ações negociadas não pode ser menor que 0.")]
+    public int QuantidadeAcoesNegociadas
+    {
+        get => _quantidadeAcoesNegociadas;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(QuantidadeAcoesNegociadas), value, "A quantidade de ações negociadas não pode ser menor que 0.");
+
+            _quantidadeAcoesNegociadas = value;
+        }
+    }
 
     /// <summary>
     /// Construtor padrão necessário para deserialização.

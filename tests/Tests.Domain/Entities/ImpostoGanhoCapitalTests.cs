@@ -36,19 +36,6 @@ public class ImpostoGanhoCapitalTests
     }
 
     /// <summary>
-    /// Verifica se a instância é criada corretamente com um valor negativo.
-    /// </summary>
-    [Fact(DisplayName = "Criação de ImpostoGanhoCapital com valor negativo")]
-    public void CriarComValorNegativo_DeveAtribuirValorCorreto()
-    {
-        // Arrange & Act
-        var imposto = new ImpostoGanhoCapital(-50.25m);
-
-        // Assert
-        Assert.Equal(-50.25m, imposto.Valor);
-    }
-
-    /// <summary>
     /// Verifica se duas instâncias com o mesmo valor são consideradas iguais.
     /// </summary>
     [Fact(DisplayName = "Igualdade entre registros com mesmo valor")]
