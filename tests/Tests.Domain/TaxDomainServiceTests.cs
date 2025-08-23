@@ -21,7 +21,7 @@ public class TaxDomainServiceTests
 
         var result = _service.Execute(operacao, portfolio);
 
-        Assert.Equal(0.00m, result.tax);
+        Assert.Equal(0.00m, result.imposto);
         Assert.Equal(100, portfolio.QuantidadeAcoesAtual);
         Assert.Equal(10m, portfolio.PrecoMedioPonderado);
     }
@@ -44,7 +44,7 @@ public class TaxDomainServiceTests
         var operacao = new Operacao { TipoOperacao = TipoOperacaoEnum.Sell, PrecoUnitarioAcao = 5m, Quantidade = 50 };
         var result = _service.Execute(operacao, portfolio);
 
-        Assert.Equal(0.00m, result.tax);
+        Assert.Equal(0.00m, result.imposto);
         Assert.Equal(50, portfolio.QuantidadeAcoesAtual);
         Assert.Equal(250m, portfolio.PrejuizoAcumulado ); // (10-5)*50
     }
@@ -58,7 +58,7 @@ public class TaxDomainServiceTests
     //    var operacao = new Operacao { TipoOperacao = TipoOperacaoEnum.Sell, PrecoUnitarioAcao = 10m, Quantidade = 1000 }; // total < 20000
     //    var result = _service.Execute(operacao, portfolio);
 
-    //    Assert.Equal(0.00m, result.tax);
+    //    Assert.Equal(0.00m, result.imposto);
     //}
 
     //[Fact]
@@ -71,7 +71,7 @@ public class TaxDomainServiceTests
     //    var operacao = new Operacao { TipoOperacao = TipoOperacaoEnum.Sell, PrecoUnitarioAcao = 12m, Quantidade = 50 };
     //    var result = _service.Execute(operacao, portfolio);
 
-    //    Assert.Equal(0.00m, result.tax);
+    //    Assert.Equal(0.00m, result.imposto);
     //    Assert.True(portfolio.PrejuizoAcumulado  < 500m);
     //}
 
@@ -87,7 +87,7 @@ public class TaxDomainServiceTests
     //    var expectedProfit = (20m - 10m) * 50; // 500
     //    var expectedTax = Math.Round(expectedProfit * 0.20m, 2, MidpointRounding.AwayFromZero);
 
-    //    Assert.Equal(expectedTax, result.tax);
+    //    Assert.Equal(expectedTax, result.imposto);
     //    Assert.Equal(50, portfolio.QuantidadeAcoesAtual);
     //    Assert.Equal(0m, portfolio.PrejuizoAcumulado );
     //}
@@ -105,7 +105,7 @@ public class TaxDomainServiceTests
     //    var lucroAcumulado = (20m - 10m) * 50 - 100m; // 500-100 = 400
     //    var expectedTax = Math.Round(lucroAcumulado * 0.20m, 2, MidpointRounding.AwayFromZero);
 
-    //    Assert.Equal(expectedTax, result.tax);
+    //    Assert.Equal(expectedTax, result.imposto);
     //    Assert.Equal(0m, portfolio.PrejuizoAcumulado );
     //}
 }

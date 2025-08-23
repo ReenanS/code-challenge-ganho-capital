@@ -28,7 +28,7 @@ public class CalcularImpostoFixtureTests : IClassFixture<OperacoesFixture>
         // Verifica os valores de imposto
         for (int i = 0; i < expected.Length; i++)
         {
-            Assert.Equal(expected[i], taxes[i].tax);
+            Assert.Equal(expected[i], taxes[i].imposto);
         }
     }
 
