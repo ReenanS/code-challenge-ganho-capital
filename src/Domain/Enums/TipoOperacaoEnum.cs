@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums;
 
-public enum OperationTypeEnum
+public enum TipoOperacaoEnum
 {
     Buy,
     Sell

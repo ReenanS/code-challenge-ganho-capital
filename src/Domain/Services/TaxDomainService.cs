@@ -5,43 +5,46 @@ namespace Domain.Services;
 
 public class TaxDomainService
 {
-    public TaxResult Execute(Operation op, Portfolio portfolio)
+    public ImpostoPago Execute(Operacao operacao, Portfolio portfolio)
     {
-        if (op.IsBuy())
+        /*Nenhum imposto é pago em operações de compra.*/
+        if (operacao.EhCompra())
         {
-            //Console.WriteLine("Essa operação é de COMPRA.");
-            portfolio.ApplyBuy(op);
-            return new TaxResult(0.00m);
+            portfolio.AplicarCompra(operacao);
+            return new ImpostoPago(0.00m);
         }
 
-        // SELL
-        //Console.WriteLine("Essa operação é de VENDA.");
-
-        if (op.Quantity > portfolio.TotalQuantity)
+        if (operacao.Quantidade > portfolio.QuantidadeAcoesAtual)
             throw new InvalidOperationException("Quantidade vendida maior que a disponível.");
 
-        var totalSale = op.UnitCost * op.Quantity;
-        var profit = (op.UnitCost - portfolio.AvgPrice) * op.Quantity;
+        decimal valorTotalOperacao = operacao.PrecoUnitarioAcao * operacao.Quantidade;
 
-        portfolio.ReduceQuantity(op.Quantity);
+        decimal lucro = (operacao.PrecoUnitarioAcao - portfolio.PrecoMedioPonderado) * operacao.Quantidade;
 
-        if (profit < 0)
+        portfolio.ReduzirQuantidade(operacao.Quantidade);
+
+        if (lucro < 0)
         {
-            portfolio.RegisterLoss(Math.Abs(profit));
-            return new TaxResult(0.00m);
+            portfolio.RegistrarPrejuizo(Math.Abs(lucro));
+            return new ImpostoPago(0.00m);
         }
 
-        if (totalSale <= 20000.00m)
-            return new TaxResult(0.00m);
+        /*Você não paga nenhum imposto e não deve deduzir o lucro obtido dos prejuízos acumulados se o valor
+        total da operação (custo unitário da ação x quantidade) for menor ou igual a R$ 20000,00.*/
 
-        var taxableProfit = profit - portfolio.AccumulatedLoss;
-        if (taxableProfit <= 0)
+        if (valorTotalOperacao <= 20000.00m)
+            return new ImpostoPago(0.00m);
+
+        decimal lucroAcumulado = lucro - portfolio.PrejuizoAcumulado;
+
+        if (lucroAcumulado <= 0)
         {
-            portfolio.DeductLoss(profit);
-            return new TaxResult(0.00m);
+            portfolio.DeduzirPrejuizo(lucro);
+            return new ImpostoPago(0.00m);
         }
 
-        portfolio.ClearLoss();
-        return new TaxResult(Math.Round(taxableProfit * 0.20m, 2, MidpointRounding.AwayFromZero));
+        portfolio.LimparPrejuizo();
+
+        return new ImpostoPago(Math.Round(lucroAcumulado * 0.20m, 2, MidpointRounding.AwayFromZero));
     }
 }

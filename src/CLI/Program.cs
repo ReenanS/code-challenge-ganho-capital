@@ -18,13 +18,13 @@ class Program
                 Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
             };
 
-            var operations = JsonSerializer.Deserialize<List<Operation>>(line, options);
+            var operacoes = JsonSerializer.Deserialize<List<Operacao>>(line, options);
 
-            if (operations is null) continue;
+            if (operacoes is null) continue;
 
-            var useCase = new CalculateTaxesUseCase(new TaxDomainService());
-            var results = useCase.Execute(operations)
-                .Select(r => new { tax = r.Tax });
+            var useCase = new CalcularImpostoUseCase(new ImpostoService());
+            var results = useCase.Execute(operacoes)
+                .Select(r => new { imposto = r.tax });
 
             Console.WriteLine(JsonSerializer.Serialize(results));
         }

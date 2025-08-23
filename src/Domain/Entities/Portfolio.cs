@@ -2,38 +2,38 @@
 
 public class Portfolio
 {
-    public decimal AvgPrice { get; private set; }
-    public int TotalQuantity { get; private set; }
-    public decimal AccumulatedLoss { get; private set; }
+    public decimal PrecoMedioPonderado { get; private set; }
+    public int QuantidadeAcoesAtual { get; private set; }
+    public decimal PrejuizoAcumulado  { get; private set; }
 
-    public Portfolio(decimal avgPrice = 0, int totalQuantity = 0, decimal accumulatedLoss = 0)
+    public Portfolio(decimal precoMedioPonderado = 0, int quantidadeAcoesAtual = 0, decimal prejuizoAcumulado = 0)
     {
-        AvgPrice = avgPrice;
-        TotalQuantity = totalQuantity;
-        AccumulatedLoss = accumulatedLoss;
+        PrecoMedioPonderado = precoMedioPonderado;
+        QuantidadeAcoesAtual = quantidadeAcoesAtual;
+        PrejuizoAcumulado = prejuizoAcumulado;
     }
 
-    public void ApplyBuy(Operation op)
+    public void AplicarCompra(Operacao operacao)
     {
-        AvgPrice = ((TotalQuantity * AvgPrice) + (op.Quantity * op.UnitCost)) / (TotalQuantity + op.Quantity);
-        TotalQuantity += op.Quantity;
+        PrecoMedioPonderado = ((QuantidadeAcoesAtual * PrecoMedioPonderado) + (operacao.Quantidade * operacao.PrecoUnitarioAcao)) / (QuantidadeAcoesAtual + operacao.Quantidade);
+        QuantidadeAcoesAtual += operacao.Quantidade;
     }
 
-    public void RegisterLoss(decimal value)
+    public void RegistrarPrejuizo(decimal valor)
     {
-        AccumulatedLoss += value;
+        PrejuizoAcumulado += valor;
     }
 
-    public void DeductLoss(decimal value)
+    public void DeduzirPrejuizo(decimal valor)
     {
-        AccumulatedLoss = Math.Max(0, AccumulatedLoss - value);
+        PrejuizoAcumulado = Math.Max(0, PrejuizoAcumulado  - valor);
     }
 
-    public void ClearLoss()
+    public void LimparPrejuizo()
     {
-        AccumulatedLoss = 0;
+        PrejuizoAcumulado = 0;
     }
 
-    public void ReduceQuantity(int q) => TotalQuantity -= q;
+    public void ReduzirQuantidade(int q) => QuantidadeAcoesAtual -= q;
 }
 
