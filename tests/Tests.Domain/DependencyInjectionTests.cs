@@ -1,0 +1,32 @@
+﻿using Domain.Services;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Domain.Tests;
+
+/// <summary>
+/// Testes unitários para a classe de extensão <see cref="DependencyInjection"/>.
+/// Cobre registro de serviços no container de DI.
+/// </summary>
+[Collection("DependencyInjectionTests Collection")]
+public class DependencyInjectionTests
+{
+
+    /// <summary>
+    /// Verifica que todos os serviços esperados estão registrados corretamente.
+    /// </summary>
+    [Fact(DisplayName = "Verificação de registros adicionais deve passar caso novos serviços sejam adicionados")]
+    public void AddDomainServices_RegistroDeServicos_Futuro()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        var returnedServices = services.AddDomainServices();
+        var provider = returnedServices.BuildServiceProvider();
+
+        // Assert
+        var calculoService = provider.GetService<ICalculoImpostoGanhoCapitalService>();
+        Assert.NotNull(calculoService);
+        Assert.IsType<CalculoImpostoGanhoCapitalService>(calculoService);
+    }
+}
