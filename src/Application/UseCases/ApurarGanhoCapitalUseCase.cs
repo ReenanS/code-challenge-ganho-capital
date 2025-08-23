@@ -10,13 +10,21 @@ namespace Application.UseCases;
 /// <remarks>
 /// Inicializa uma nova instância do <see cref="ApurarGanhoCapitalUseCase"/>.
 /// </remarks>
-/// <param name="service">Serviço de cálculo do imposto sobre ganho de capital.</param>
-public class ApurarGanhoCapitalUseCase(ICalculoImpostoGanhoCapitalService service)
+public class ApurarGanhoCapitalUseCase : IApurarGanhoCapitalUseCase
 {
     /// <summary>
     /// Serviço de domínio responsável pelo cálculo do imposto sobre ganho de capital.
     /// </summary>
-    private readonly ICalculoImpostoGanhoCapitalService _service = service;
+    private readonly ICalculoImpostoGanhoCapitalService _service;
+
+    /// <summary>
+    /// Construtor que injeta o serviço de cálculo do imposto.
+    /// </summary>
+    /// <param name="service">Serviço de cálculo do imposto sobre ganho de capital.</param>
+    public ApurarGanhoCapitalUseCase(ICalculoImpostoGanhoCapitalService service)
+    {
+        _service = service ?? throw new System.ArgumentNullException(nameof(service));
+    }
 
     /// <summary>
     /// Executa o cálculo do imposto sobre ganho de capital para as operações informadas.

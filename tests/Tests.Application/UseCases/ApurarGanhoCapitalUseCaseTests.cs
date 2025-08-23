@@ -62,8 +62,8 @@ public class ApurarGanhoCapitalUseCaseTests
         Assert.NotNull(resultado);
         var lista = new List<ImpostoGanhoCapital>(resultado);
         Assert.Equal(2, lista.Count);
-        Assert.Equal(5m, lista[0].Valor);  // 10*5*0.1
-        Assert.Equal(20m, lista[1].Valor); // 20*10*0.1
+        Assert.Equal(5m, lista[0].Valor);
+        Assert.Equal(20m, lista[1].Valor);
 
         _mockService.Verify(s => s.Calcular(It.IsAny<Operacao>(), It.IsAny<Portfolio>()), Times.Exactly(2));
     }
@@ -92,8 +92,8 @@ public class ApurarGanhoCapitalUseCaseTests
         Assert.NotNull(resultado);
         var lista = new List<ImpostoGanhoCapital>(resultado);
         Assert.Equal(2, lista.Count);
-        Assert.Equal(9m, lista[0].Valor);  // 15*3*0.2
-        Assert.Equal(35m, lista[1].Valor); // 25*7*0.2
+        Assert.Equal(9m, lista[0].Valor);
+        Assert.Equal(35m, lista[1].Valor);
 
         _mockService.Verify(s => s.Calcular(It.IsAny<Operacao>(), It.IsAny<Portfolio>()), Times.Exactly(2));
     }

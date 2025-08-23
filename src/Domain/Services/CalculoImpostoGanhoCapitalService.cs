@@ -61,7 +61,7 @@ public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalServ
         portfolio.LimparPrejuizo();
 
         // Calcula o  (20% do lucroOperacao líquido)
-        decimal valorImpostoGanhoCapital = Math.Round(Math.Round(lucroAcumulado * 0.20m, 2, MidpointRounding.AwayFromZero));
+        decimal valorImpostoGanhoCapital = Math.Round(lucroAcumulado * 0.20m, 2, MidpointRounding.AwayFromZero);
 
         // Retorna o imposto calculado
         return new ImpostoGanhoCapital(valorImpostoGanhoCapital);

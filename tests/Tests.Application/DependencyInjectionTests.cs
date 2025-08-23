@@ -32,8 +32,8 @@ public class DependencyInjectionTests
         var provider = returnedServices.BuildServiceProvider();
 
         // Assert
-        var apurarUseCase = provider.GetService<ApurarGanhoCapitalUseCase>();
-        Assert.NotNull(apurarUseCase);
-        Assert.IsType<ApurarGanhoCapitalUseCase>(apurarUseCase);
+        var apurarGanhoCapitalService = provider.GetService<IApurarGanhoCapitalUseCase>();
+        Assert.NotNull(apurarGanhoCapitalService);
+        Assert.IsType<ApurarGanhoCapitalUseCase>(apurarGanhoCapitalService);
     }
 }

@@ -16,7 +16,7 @@ public static class DependencyInjection
     /// <returns>A mesma instância de <see cref="IServiceCollection"/> para encadeamento.</returns>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddTransient<ApurarGanhoCapitalUseCase>();
+        services.AddSingleton<IApurarGanhoCapitalUseCase, ApurarGanhoCapitalUseCase>();
 
         return services;
     }
