@@ -6,11 +6,11 @@ namespace Tests.Domain;
 
 public class TaxDomainServiceTests
 {
-    private readonly ImpostoService _service;
+    private readonly CalculoImpostoGanhoCapitalService _service;
 
     public TaxDomainServiceTests()
     {
-        _service = new ImpostoService();
+        _service = new CalculoImpostoGanhoCapitalService();
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public class TaxDomainServiceTests
 
         var result = _service.Execute(operacao, portfolio);
 
-        Assert.Equal(0.00m, result.Imposto);
+        Assert.Equal(0.00m, result.Valor);
         Assert.Equal(100, portfolio.QuantidadeAcoesAtual);
         Assert.Equal(10m, portfolio.PrecoMedioPonderado);
     }
@@ -44,9 +44,9 @@ public class TaxDomainServiceTests
         var operacao = new Operacao { TipoOperacao = TipoOperacaoEnum.Sell, PrecoUnitarioAcao = 5m, QuantidadeAcoesNegociadas = 50 };
         var result = _service.Execute(operacao, portfolio);
 
-        Assert.Equal(0.00m, result.Imposto);
+        Assert.Equal(0.00m, result.Valor);
         Assert.Equal(50, portfolio.QuantidadeAcoesAtual);
-        Assert.Equal(250m, portfolio.PrejuizoAcumulado ); // (10-5)*50
+        Assert.Equal(250m, portfolio.PrejuizoAcumulado); // (10-5)*50
     }
 
     //[Fact]

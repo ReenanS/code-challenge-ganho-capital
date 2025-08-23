@@ -24,7 +24,7 @@ public class PortfolioTests
         portfolio.RegistrarPrejuizo(500m);
         portfolio.RegistrarPrejuizo(250m);
 
-        Assert.Equal(750m, portfolio.PrejuizoAcumulado );
+        Assert.Equal(750m, portfolio.PrejuizoAcumulado);
     }
 
     [Fact]
@@ -32,11 +32,11 @@ public class PortfolioTests
     {
         var portfolio = new Portfolio(prejuizoAcumulado: 500m);
         portfolio.DeduzirPrejuizo(200m);
-        Assert.Equal(300m, portfolio.PrejuizoAcumulado );
+        Assert.Equal(300m, portfolio.PrejuizoAcumulado);
 
         // Deduzir mais que o acumulado deve zerar
         portfolio.DeduzirPrejuizo(500m);
-        Assert.Equal(0m, portfolio.PrejuizoAcumulado );
+        Assert.Equal(0m, portfolio.PrejuizoAcumulado);
     }
 
     [Fact]
@@ -44,18 +44,18 @@ public class PortfolioTests
     {
         var portfolio = new Portfolio(prejuizoAcumulado: 1000m);
         portfolio.LimparPrejuizo();
-        Assert.Equal(0m, portfolio.PrejuizoAcumulado );
+        Assert.Equal(0m, portfolio.PrejuizoAcumulado);
     }
 
     [Fact]
     public void ReduceQuantity_ShouldDecreaseTotalQuantity()
     {
         var portfolio = new Portfolio(quantidadeAcoesAtual: 200);
-        portfolio.ReduzirQuantidadeAcoes(50);
+        portfolio.ReduzirQuantidade(50);
         Assert.Equal(150, portfolio.QuantidadeAcoesAtual);
 
         // Reduzir mais que o total deve permitir zero (ou pode lançar exceção se quiser)
-        portfolio.ReduzirQuantidadeAcoes(200);
+        portfolio.ReduzirQuantidade(200);
         Assert.Equal(-50, portfolio.QuantidadeAcoesAtual); // atualmente permite negativo
     }
 
@@ -67,11 +67,11 @@ public class PortfolioTests
         portfolio.RegistrarPrejuizo(500m);
         portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 20m, QuantidadeAcoesNegociadas = 50 });
         portfolio.DeduzirPrejuizo(300m);
-        portfolio.ReduzirQuantidadeAcoes(50);
+        portfolio.ReduzirQuantidade(50);
 
         decimal expectedAvg = ((100 * 10m) + (50 * 20m)) / 150;
         Assert.Equal(expectedAvg, portfolio.PrecoMedioPonderado);
         Assert.Equal(100, portfolio.QuantidadeAcoesAtual); // 150 - 50
-        Assert.Equal(200m, portfolio.PrejuizoAcumulado ); // 500 - 300
+        Assert.Equal(200m, portfolio.PrejuizoAcumulado); // 500 - 300
     }
 }

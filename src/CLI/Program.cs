@@ -22,10 +22,10 @@ class Program
 
             if (operacoes is null) continue;
 
-            var useCase = new CalcularImpostoUseCase(new ImpostoService());
+            var useCase = new ApurarGanhoCapitalUseCase(new CalculoImpostoGanhoCapitalService());
 
             var results = useCase.Execute(operacoes)
-                .Select(r => new { tax = r.Imposto });
+                .Select(r => new { tax = r.Valor });
 
             Console.WriteLine(JsonSerializer.Serialize(results));
         }

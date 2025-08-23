@@ -4,7 +4,7 @@ public class Portfolio
 {
     public decimal PrecoMedioPonderado { get; private set; }
     public int QuantidadeAcoesAtual { get; private set; }
-    public decimal PrejuizoAcumulado  { get; private set; }
+    public decimal PrejuizoAcumulado { get; private set; }
 
     public Portfolio(decimal precoMedioPonderado = 0, int quantidadeAcoesAtual = 0, decimal prejuizoAcumulado = 0)
     {
@@ -26,7 +26,7 @@ public class Portfolio
 
     public void DeduzirPrejuizo(decimal valor)
     {
-        PrejuizoAcumulado = Math.Max(0, PrejuizoAcumulado  - valor);
+        PrejuizoAcumulado = Math.Max(0, PrejuizoAcumulado - valor);
     }
 
     public void LimparPrejuizo()
@@ -34,6 +34,6 @@ public class Portfolio
         PrejuizoAcumulado = 0;
     }
 
-    public void ReduzirQuantidadeAcoes(int quantidade) => QuantidadeAcoesAtual -= quantidade;
+    public void ReduzirQuantidade(int quantidade) => QuantidadeAcoesAtual -= quantidade;
 }
 

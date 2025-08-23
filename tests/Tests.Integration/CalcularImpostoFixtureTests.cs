@@ -1,7 +1,6 @@
 using Application.UseCases;
 using Domain.Entities;
 using Domain.Services;
-using Domain.ValueObjects;
 using Tests.Integration.Fixtures;
 
 namespace Tests.Integration;
@@ -9,18 +8,18 @@ namespace Tests.Integration;
 public class CalcularImpostoFixtureTests : IClassFixture<OperacoesFixture>
 {
     private readonly OperacoesFixture _fixture;
-    private readonly CalcularImpostoUseCase _useCase;
+    private readonly ApurarGanhoCapitalUseCase _useCase;
 
     public CalcularImpostoFixtureTests(OperacoesFixture fixture)
     {
         _fixture = fixture;
-        _useCase = new CalcularImpostoUseCase(new ImpostoService());
+        _useCase = new ApurarGanhoCapitalUseCase(new CalculoImpostoGanhoCapitalService());
     }
 
     private void ValidarImposto(List<Operacao> operacoes, decimal[] expected)
     {
         // Converte o IEnumerable<ImpostoPago> retornado para List<ImpostoPago>
-        var taxes = new List<ImpostoPago>(_useCase.Execute(operacoes));
+        var taxes = new List<ImpostoGanhoCapital>(_useCase.Execute(operacoes));
 
         // Verifica a quantidadeAcoesNegociadas de elementos
         Assert.Equal(expected.Length, taxes.Count);
@@ -28,7 +27,7 @@ public class CalcularImpostoFixtureTests : IClassFixture<OperacoesFixture>
         // Verifica os valores de imposto
         for (int i = 0; i < expected.Length; i++)
         {
-            Assert.Equal(expected[i], taxes[i].Imposto);
+            Assert.Equal(expected[i], taxes[i].Valor);
         }
     }
 

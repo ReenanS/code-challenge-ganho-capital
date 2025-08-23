@@ -1,21 +1,20 @@
 ﻿using Domain.Entities;
 using Domain.Services;
-using Domain.ValueObjects;
 
 namespace Application.UseCases;
 
-public class CalcularImpostoUseCase
+public class ApurarGanhoCapitalUseCase
 {
-    private readonly ImpostoService _service;
+    private readonly CalculoImpostoGanhoCapitalService _service;
 
-    public CalcularImpostoUseCase(ImpostoService service)
+    public ApurarGanhoCapitalUseCase(CalculoImpostoGanhoCapitalService service)
     {
         _service = service;
     }
 
-    public IEnumerable<ImpostoPago> Execute(IEnumerable<Operacao> operacoes)
+    public IEnumerable<ImpostoGanhoCapital> Execute(IEnumerable<Operacao> operacoes)
     {
-        var results = new List<ImpostoPago>();
+        var results = new List<ImpostoGanhoCapital>();
         var portfolio = new Portfolio();
 
         foreach (var operacao in operacoes)
