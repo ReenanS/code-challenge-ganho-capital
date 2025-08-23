@@ -1,18 +1,17 @@
-﻿namespace Domain.Enums
+﻿namespace Domain.Enums;
+
+/// <summary>
+/// Representa os tipos de operações que podem ser realizadas em ações.
+/// </summary>
+public enum TipoOperacaoEnum
 {
     /// <summary>
-    /// Representa os tipos de operações que podem ser realizadas em ações.
+    /// Operação de compra de ações.
     /// </summary>
-    public enum TipoOperacaoEnum
-    {
-        /// <summary>
-        /// Operação de compra de ações.
-        /// </summary>
-        Buy,
+    Buy,
 
-        /// <summary>
-        /// Operação de venda de ações.
-        /// </summary>
-        Sell
-    }
+    /// <summary>
+    /// Operação de venda de ações.
+    /// </summary>
+    Sell
 }
