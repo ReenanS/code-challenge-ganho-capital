@@ -1,33 +1,52 @@
-﻿using Application.UseCases;
+﻿using Application;
+using Application.UseCases;
+using Domain;
 using Domain.Entities;
-using Domain.Services;
+using Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 class Program
 {
     static void Main()
     {
+        // 1️⃣ Configurar container de DI
+        var services = new ServiceCollection();
+
+        // Registrar dependências por camada
+        services.AddDomainServices()          // Domain Layer
+                .AddApplicationServices()     // Application Layer
+                .AddInfrastructureServices(); // Infrastructure Layer
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        // Recuperar JsonSerializerOptions da Infra
+        var jsonOptions = serviceProvider.GetRequiredService<JsonSerializerOptions>();
+
+        // 2️⃣ Loop de leitura da CLI
         string? line;
         while ((line = Console.ReadLine()) != null)
         {
-
-            var options = new JsonSerializerOptions
+            try
             {
-                PropertyNameCaseInsensitive = true,
-                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
-            };
+                var operacoes = JsonSerializer.Deserialize<List<Operacao>>(line, jsonOptions);
+                if (operacoes is null) continue;
 
-            var operacoes = JsonSerializer.Deserialize<List<Operacao>>(line, options);
+                // 3️⃣ Recuperar UseCase via DI
+                var useCase = serviceProvider.GetRequiredService<ApurarGanhoCapitalUseCase>();
 
-            if (operacoes is null) continue;
+                // 4️⃣ Executar o UseCase
+                var results = useCase.Execute(operacoes)
+                                     .Select(r => new { tax = r.Valor });
 
-            var useCase = new ApurarGanhoCapitalUseCase(new CalculoImpostoGanhoCapitalService());
-
-            var results = useCase.Execute(operacoes)
-                .Select(r => new { tax = r.Valor });
-
-            Console.WriteLine(JsonSerializer.Serialize(results));
+                // 5️⃣ Escrever resultado
+                Console.WriteLine(JsonSerializer.Serialize(results, jsonOptions));
+            }
+            catch (Exception ex)
+            {
+                // Tratamento simples de erros (opcional para logs ou feedback)
+                Console.Error.WriteLine($"Erro: {ex.Message}");
+            }
         }
     }
 }

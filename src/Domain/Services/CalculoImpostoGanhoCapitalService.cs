@@ -2,7 +2,7 @@
 
 namespace Domain.Services;
 
-public class CalculoImpostoGanhoCapitalService
+public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalService
 {
     public ImpostoGanhoCapital Calcular(Operacao operacao, Portfolio portfolio)
     {

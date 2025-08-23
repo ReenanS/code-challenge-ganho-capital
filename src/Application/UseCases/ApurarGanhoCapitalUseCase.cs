@@ -5,9 +5,9 @@ namespace Application.UseCases;
 
 public class ApurarGanhoCapitalUseCase
 {
-    private readonly CalculoImpostoGanhoCapitalService _service;
+    private readonly ICalculoImpostoGanhoCapitalService _service;
 
-    public ApurarGanhoCapitalUseCase(CalculoImpostoGanhoCapitalService service)
+    public ApurarGanhoCapitalUseCase(ICalculoImpostoGanhoCapitalService service)
     {
         _service = service;
     }
