@@ -28,11 +28,11 @@ public class OperacaoTests
         {
             TipoOperacao = TipoOperacaoEnum.Buy,
             PrecoUnitarioAcao = 15.5m,
-            Quantidade = 100
+            QuantidadeAcoesNegociadas = 100
         };
 
         Assert.Equal(TipoOperacaoEnum.Buy, operacao.TipoOperacao);
         Assert.Equal(15.5m, operacao.PrecoUnitarioAcao);
-        Assert.Equal(100, operacao.Quantidade);
+        Assert.Equal(100, operacao.QuantidadeAcoesNegociadas);
     }
 }

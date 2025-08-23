@@ -22,13 +22,13 @@ public class CalcularImpostoFixtureTests : IClassFixture<OperacoesFixture>
         // Converte o IEnumerable<ImpostoPago> retornado para List<ImpostoPago>
         var taxes = new List<ImpostoPago>(_useCase.Execute(operacoes));
 
-        // Verifica a quantidade de elementos
+        // Verifica a quantidadeAcoesNegociadas de elementos
         Assert.Equal(expected.Length, taxes.Count);
 
         // Verifica os valores de imposto
         for (int i = 0; i < expected.Length; i++)
         {
-            Assert.Equal(expected[i], taxes[i].imposto);
+            Assert.Equal(expected[i], taxes[i].Imposto);
         }
     }
 

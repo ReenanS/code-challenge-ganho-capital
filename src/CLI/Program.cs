@@ -25,7 +25,7 @@ class Program
             var useCase = new CalcularImpostoUseCase(new ImpostoService());
 
             var results = useCase.Execute(operacoes)
-                .Select(r => new { tax = r.imposto });
+                .Select(r => new { tax = r.Imposto });
 
             Console.WriteLine(JsonSerializer.Serialize(results));
         }

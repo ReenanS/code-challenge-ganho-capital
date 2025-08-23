@@ -12,16 +12,16 @@ public class Operacao
     public decimal PrecoUnitarioAcao { get; set; }
 
     [JsonPropertyName("quantity")]
-    public int Quantidade { get; set; }
+    public int QuantidadeAcoesNegociadas { get; set; }
 
     public Operacao() { } // Construtor padrão necessário para deserialização
 
     // Construtor adicional para inicialização rápida
-    public Operacao(TipoOperacaoEnum tipoOperacao, decimal precoUnitarioAcao, int quantidade)
+    public Operacao(TipoOperacaoEnum tipoOperacao, decimal precoUnitarioAcao, int quantidadeAcoesNegociadas)
     {
         TipoOperacao = tipoOperacao;
         PrecoUnitarioAcao = precoUnitarioAcao;
-        Quantidade = quantidade;
+        QuantidadeAcoesNegociadas = quantidadeAcoesNegociadas;
     }
 
     // Métodos auxiliares para melhorar legibilidade

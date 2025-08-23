@@ -9,8 +9,8 @@ public class PortfolioTests
     public void ApplyBuy_ShouldUpdateAvgPriceCorrectly()
     {
         var portfolio = new Portfolio();
-        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 10m, Quantidade = 100 });
-        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 20m, Quantidade = 50 });
+        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 10m, QuantidadeAcoesNegociadas = 100 });
+        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 20m, QuantidadeAcoesNegociadas = 50 });
 
         decimal expectedAvg = ((100 * 10m) + (50 * 20m)) / (100 + 50);
         Assert.Equal(expectedAvg, portfolio.PrecoMedioPonderado);
@@ -51,11 +51,11 @@ public class PortfolioTests
     public void ReduceQuantity_ShouldDecreaseTotalQuantity()
     {
         var portfolio = new Portfolio(quantidadeAcoesAtual: 200);
-        portfolio.ReduzirQuantidade(50);
+        portfolio.ReduzirQuantidadeAcoes(50);
         Assert.Equal(150, portfolio.QuantidadeAcoesAtual);
 
         // Reduzir mais que o total deve permitir zero (ou pode lançar exceção se quiser)
-        portfolio.ReduzirQuantidade(200);
+        portfolio.ReduzirQuantidadeAcoes(200);
         Assert.Equal(-50, portfolio.QuantidadeAcoesAtual); // atualmente permite negativo
     }
 
@@ -63,11 +63,11 @@ public class PortfolioTests
     public void ComplexScenario_ShouldMaintainCorrectState()
     {
         var portfolio = new Portfolio();
-        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 10m, Quantidade = 100 });
+        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 10m, QuantidadeAcoesNegociadas = 100 });
         portfolio.RegistrarPrejuizo(500m);
-        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 20m, Quantidade = 50 });
+        portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 20m, QuantidadeAcoesNegociadas = 50 });
         portfolio.DeduzirPrejuizo(300m);
-        portfolio.ReduzirQuantidade(50);
+        portfolio.ReduzirQuantidadeAcoes(50);
 
         decimal expectedAvg = ((100 * 10m) + (50 * 20m)) / 150;
         Assert.Equal(expectedAvg, portfolio.PrecoMedioPonderado);

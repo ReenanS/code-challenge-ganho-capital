@@ -7,26 +7,31 @@ public class ImpostoService
 {
     public ImpostoPago Execute(Operacao operacao, Portfolio portfolio)
     {
+        /*Nenhum imposto é pago em operações de compra.*/
         if (operacao.EhCompra())
         {
             portfolio.AplicarCompra(operacao);
             return new ImpostoPago(0.00m);
         }
 
-        if (operacao.Quantidade > portfolio.QuantidadeAcoesAtual)
-            throw new InvalidOperationException("Quantidade vendida maior que a disponível.");
+        if (operacao.QuantidadeAcoesNegociadas > portfolio.QuantidadeAcoesAtual)
+            throw new InvalidOperationException("QuantidadeAcoesNegociadas vendida maior que a disponível.");
 
-        decimal valorTotalOperacao = operacao.PrecoUnitarioAcao * operacao.Quantidade;
+        /*Valor total da operação (custo unitário da ação x quantidade) */
+        decimal valorTotalOperacao = operacao.PrecoUnitarioAcao * operacao.QuantidadeAcoesNegociadas;
 
-        decimal lucro = (operacao.PrecoUnitarioAcao - portfolio.PrecoMedioPonderado) * operacao.Quantidade;
+        decimal lucro = (operacao.PrecoUnitarioAcao - portfolio.PrecoMedioPonderado) * operacao.QuantidadeAcoesNegociadas;
 
-        portfolio.ReduzirQuantidade(operacao.Quantidade);
+        portfolio.ReduzirQuantidadeAcoes(operacao.QuantidadeAcoesNegociadas);
 
         if (lucro < 0)
         {
             portfolio.RegistrarPrejuizo(Math.Abs(lucro));
             return new ImpostoPago(0.00m);
         }
+
+        /*Você não paga nenhum imposto e não deve deduzir o lucro obtido dos prejuízos acumulados se o valor
+        total da operação (custo unitário da ação x quantidade) for menor ou igual a R$ 20000,00.*/
 
         if (valorTotalOperacao <= 20000.00m)
             return new ImpostoPago(0.00m);

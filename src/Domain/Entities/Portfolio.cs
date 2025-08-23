@@ -15,8 +15,8 @@ public class Portfolio
 
     public void AplicarCompra(Operacao operacao)
     {
-        PrecoMedioPonderado = ((QuantidadeAcoesAtual * PrecoMedioPonderado) + (operacao.Quantidade * operacao.PrecoUnitarioAcao)) / (QuantidadeAcoesAtual + operacao.Quantidade);
-        QuantidadeAcoesAtual += operacao.Quantidade;
+        PrecoMedioPonderado = ((QuantidadeAcoesAtual * PrecoMedioPonderado) + (operacao.QuantidadeAcoesNegociadas * operacao.PrecoUnitarioAcao)) / (QuantidadeAcoesAtual + operacao.QuantidadeAcoesNegociadas);
+        QuantidadeAcoesAtual += operacao.QuantidadeAcoesNegociadas;
     }
 
     public void RegistrarPrejuizo(decimal valor)
@@ -34,6 +34,6 @@ public class Portfolio
         PrejuizoAcumulado = 0;
     }
 
-    public void ReduzirQuantidade(int q) => QuantidadeAcoesAtual -= q;
+    public void ReduzirQuantidadeAcoes(int quantidade) => QuantidadeAcoesAtual -= quantidade;
 }
 
