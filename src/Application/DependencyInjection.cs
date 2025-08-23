@@ -1,14 +1,25 @@
 ﻿using Application.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application;
-
-public static class DependencyInjection
+namespace Application
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    /// <summary>
+    /// Classe de extensão responsável por registrar os serviços da camada Application
+    /// no container de Injeção de Dependência.
+    /// </summary>
+    public static class DependencyInjection
     {
-        // Registrar UseCases
-        services.AddTransient<ApurarGanhoCapitalUseCase>();
-        return services;
+        /// <summary>
+        /// Registra os UseCases da camada Application no container de serviços.
+        /// </summary>
+        /// <param name="services">Coleção de serviços do .NET para registro de dependências.</param>
+        /// <returns>A mesma instância de <see cref="IServiceCollection"/> para encadeamento.</returns>
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            // Registrar UseCases da camada Application
+            services.AddTransient<ApurarGanhoCapitalUseCase>();
+
+            return services;
+        }
     }
 }
