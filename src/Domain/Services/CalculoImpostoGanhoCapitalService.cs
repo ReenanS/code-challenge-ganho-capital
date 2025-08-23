@@ -4,7 +4,7 @@ namespace Domain.Services;
 
 public class CalculoImpostoGanhoCapitalService
 {
-    public ImpostoGanhoCapital Execute(Operacao operacao, Portfolio portfolio)
+    public ImpostoGanhoCapital Calcular(Operacao operacao, Portfolio portfolio)
     {
         /*Nenhum imposto é pago em operações de compra.*/
         if (operacao.EhCompra())

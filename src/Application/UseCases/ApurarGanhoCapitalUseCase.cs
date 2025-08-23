@@ -19,7 +19,7 @@ public class ApurarGanhoCapitalUseCase
 
         foreach (var operacao in operacoes)
         {
-            results.Add(_service.Execute(operacao, portfolio));
+            results.Add(_service.Calcular(operacao, portfolio));
         }
 
         return results;

@@ -4,11 +4,11 @@ using Domain.Services;
 
 namespace Tests.Domain;
 
-public class TaxDomainServiceTests
+public class CalculoImpostoGanhoCapitalServiceTests
 {
     private readonly CalculoImpostoGanhoCapitalService _service;
 
-    public TaxDomainServiceTests()
+    public CalculoImpostoGanhoCapitalServiceTests()
     {
         _service = new CalculoImpostoGanhoCapitalService();
     }
@@ -19,7 +19,7 @@ public class TaxDomainServiceTests
         var portfolio = new Portfolio();
         var operacao = new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 10m, QuantidadeAcoesNegociadas = 100 };
 
-        var result = _service.Execute(operacao, portfolio);
+        var result = _service.Calcular(operacao, portfolio);
 
         Assert.Equal(0.00m, result.Valor);
         Assert.Equal(100, portfolio.QuantidadeAcoesAtual);
@@ -32,7 +32,7 @@ public class TaxDomainServiceTests
         var portfolio = new Portfolio(quantidadeAcoesAtual: 50);
         var operacao = new Operacao { TipoOperacao = TipoOperacaoEnum.Sell, PrecoUnitarioAcao = 10m, QuantidadeAcoesNegociadas = 100 };
 
-        Assert.Throws<InvalidOperationException>(() => _service.Execute(operacao, portfolio));
+        Assert.Throws<InvalidOperationException>(() => _service.Calcular(operacao, portfolio));
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class TaxDomainServiceTests
         portfolio.AplicarCompra(new Operacao { TipoOperacao = TipoOperacaoEnum.Buy, PrecoUnitarioAcao = 10m, QuantidadeAcoesNegociadas = 100 });
 
         var operacao = new Operacao { TipoOperacao = TipoOperacaoEnum.Sell, PrecoUnitarioAcao = 5m, QuantidadeAcoesNegociadas = 50 };
-        var result = _service.Execute(operacao, portfolio);
+        var result = _service.Calcular(operacao, portfolio);
 
         Assert.Equal(0.00m, result.Valor);
         Assert.Equal(50, portfolio.QuantidadeAcoesAtual);
