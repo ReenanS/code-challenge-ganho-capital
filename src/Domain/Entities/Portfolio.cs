@@ -43,6 +43,7 @@ public class Portfolio
         PrecoMedioPonderado = ((QuantidadeAcoesAtual * PrecoMedioPonderado) +
                                 (operacao.QuantidadeAcoesNegociadas * operacao.PrecoUnitarioAcao)) /
                                (QuantidadeAcoesAtual + operacao.QuantidadeAcoesNegociadas);
+
         QuantidadeAcoesAtual += operacao.QuantidadeAcoesNegociadas;
     }
 
