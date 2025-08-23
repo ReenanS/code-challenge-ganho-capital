@@ -44,8 +44,8 @@ public class ApurarGanhoCapitalUseCaseTests
     /// Testa Execute com diferentes tipos de operação (Buy e Sell) e valores calculados.
     /// </summary>
     [Theory(DisplayName = "Execute com operações de diferentes tipos deve retornar valores corretos")]
-    [InlineData(Domain.Enums.TipoOperacaoEnum.Buy, 10, 5, 50)] // 10 * 5 * fator = 50
-    [InlineData(Domain.Enums.TipoOperacaoEnum.Sell, 15, 3, 45)] // 15 * 3 * fator = 45
+    [InlineData(Domain.Enums.TipoOperacaoEnum.Buy, 10, 5, 50)]
+    [InlineData(Domain.Enums.TipoOperacaoEnum.Sell, 15, 3, 45)]
     public void Execute_OperacoesDiversas_RetornaValoresCalculados(Domain.Enums.TipoOperacaoEnum tipo, decimal preco, int quantidade, decimal valorEsperado)
     {
         // Arrange
