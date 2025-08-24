@@ -1,5 +1,6 @@
-﻿using Domain.Entities;
-using Domain.Services;
+﻿using Application.Interfaces;
+using Domain.Entities;
+using Domain.Interfaces;
 
 namespace Application.UseCases;
 
@@ -7,44 +8,35 @@ namespace Application.UseCases;
 /// Caso de uso responsável por apurar o imposto sobre ganho de capital
 /// para uma lista de operações financeiras.
 /// </summary>
-/// <remarks>
-/// Inicializa uma nova instância do <see cref="ApurarGanhoCapitalUseCase"/>.
-/// </remarks>
 public class ApurarGanhoCapitalUseCase : IApurarGanhoCapitalUseCase
 {
-    /// <summary>
-    /// Serviço de domínio responsável pelo cálculo do imposto sobre ganho de capital.
-    /// </summary>
     private readonly ICalculoImpostoGanhoCapitalService _service;
 
-    /// <summary>
-    /// Construtor que injeta o serviço de cálculo do imposto.
-    /// </summary>
-    /// <param name="service">Serviço de cálculo do imposto sobre ganho de capital.</param>
     public ApurarGanhoCapitalUseCase(ICalculoImpostoGanhoCapitalService service)
     {
-        _service = service ?? throw new System.ArgumentNullException(nameof(service));
+        _service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
     /// <summary>
-    /// Executa o cálculo do imposto sobre ganho de capital para as operações informadas.
+    /// Apura o imposto sobre ganho de capital para as operações,
+    /// mantendo o histórico de um portfólio em memória.
     /// </summary>
-    /// <param name="operacoes">Lista de operações financeiras (compra, venda).</param>
+    /// <param name="operacoes">Coleção de operações financeiras (compra, venda).</param>
     /// <returns>
-    /// Uma lista de <see cref="ImpostoGanhoCapital"/> representando o valor do imposto calculado
-    /// para cada operação.
+    /// Uma coleção de <see cref="ImpostoGanhoCapital"/> com os valores calculados para cada operação.
     /// </returns>
+    /// <exception cref="ArgumentNullException">Se <paramref name="operacoes"/> for nulo.</exception>
     public IEnumerable<ImpostoGanhoCapital> Execute(IEnumerable<Operacao> operacoes)
     {
-        var resultado = new List<ImpostoGanhoCapital>();
+        if (operacoes is null)
+        {
+            throw new ArgumentNullException(nameof(operacoes));
+        }
 
         var portfolio = new Portfolio();
 
-        foreach (Operacao operacao in operacoes)
-        {
-            resultado.Add(_service.Calcular(operacao, portfolio));
-        }
-
-        return resultado;
+        return operacoes
+            .Select(operacao => _service.Calcular(operacao, portfolio))
+            .ToList();
     }
 }

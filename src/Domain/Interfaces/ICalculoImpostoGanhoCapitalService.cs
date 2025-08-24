@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Domain.Services;
+namespace Domain.Interfaces;
 
 /// <summary>
 /// Interface para serviços que calculam o imposto sobre ganho de capital

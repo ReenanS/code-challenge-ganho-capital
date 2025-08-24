@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using Application.UseCases;
+using Application.Interfaces;
 using Domain.Entities;
 
 namespace CLI;

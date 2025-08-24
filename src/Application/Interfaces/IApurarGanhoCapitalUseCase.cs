@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Application.UseCases;
+namespace Application.Interfaces;
 
 /// <summary>
 /// Interface para o caso de uso de apuração de ganho de capital.

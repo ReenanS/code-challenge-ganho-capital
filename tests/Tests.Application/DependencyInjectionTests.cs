@@ -1,6 +1,7 @@
 ﻿using Application;
+using Application.Interfaces;
 using Application.UseCases;
-using Domain.Services;
+using Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 

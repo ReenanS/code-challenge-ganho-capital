@@ -1,5 +1,5 @@
 ﻿using Domain.Entities;
-using Domain.Enums;
+using Domain.Interfaces;
 
 namespace Domain.Services;
 
@@ -13,12 +13,18 @@ public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalServ
 
     public ImpostoGanhoCapital Calcular(Operacao operacao, Portfolio portfolio)
     {
-        return operacao.TipoOperacao switch
+        if (operacao.EhCompra())
         {
-            TipoOperacaoEnum.Buy => ProcessarCompra(operacao, portfolio),
-            TipoOperacaoEnum.Sell => ProcessarVenda(operacao, portfolio),
-            _ => throw new NotSupportedException($"Tipo de operação não suportado: {operacao.TipoOperacao}")
-        };
+            return ProcessarCompra(operacao, portfolio);
+        }
+
+        if (operacao.EhVenda())
+        {
+            return ProcessarVenda(operacao, portfolio);
+        }
+
+        throw new InvalidOperationException($"Tipo de operação inválido: {operacao.TipoOperacao}");
+
     }
 
     private ImpostoGanhoCapital ProcessarCompra(Operacao operacao, Portfolio portfolio)

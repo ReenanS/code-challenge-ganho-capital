@@ -1,4 +1,5 @@
-﻿using Application.UseCases;
+﻿using Application.Interfaces;
+using Application.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;

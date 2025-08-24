@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using Application.UseCases;
+using Application.Interfaces;
 using CLI;
 using Domain.Entities;
 using Moq;
