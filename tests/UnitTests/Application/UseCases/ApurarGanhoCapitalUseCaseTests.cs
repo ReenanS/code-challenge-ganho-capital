@@ -6,10 +6,6 @@ using Moq;
 
 namespace UnitTests.Application.UseCases;
 
-/// <summary>
-/// Testes unitários para o caso de uso <see cref="ApurarGanhoCapitalUseCase"/>.
-/// Cobre execução do método Execute() com diferentes listas de operações e validação de retorno.
-/// </summary>
 [Collection("ApurarGanhoCapitalUseCaseTests Collection")]
 public class ApurarGanhoCapitalUseCaseTests
 {
@@ -20,9 +16,6 @@ public class ApurarGanhoCapitalUseCaseTests
         _mockService = new Mock<ICalculoImpostoGanhoCapitalService>();
     }
 
-    /// <summary>
-    /// Verifica que Execute retorna lista vazia quando nenhuma operação é fornecida.
-    /// </summary>
     [Fact(DisplayName = "Execute com lista vazia deve retornar lista vazia")]
     public void Execute_ListaVazia_RetornaListaVazia()
     {
@@ -39,9 +32,6 @@ public class ApurarGanhoCapitalUseCaseTests
         _mockService.Verify(s => s.Calcular(It.IsAny<Operacao>(), It.IsAny<Portfolio>()), Times.Never);
     }
 
-    /// <summary>
-    /// Testa Execute com diferentes tipos de operação (Buy e Sell) e valores calculados.
-    /// </summary>
     [Theory(DisplayName = "Execute com operações de diferentes tipos deve retornar valores corretos")]
     [InlineData(TipoOperacaoEnum.Buy, 10, 5, 50)]
     [InlineData(TipoOperacaoEnum.Sell, 15, 3, 45)]

@@ -3,9 +3,6 @@ using Domain.Enums;
 
 namespace Tests.Fixtures.Domain.Entities;
 
-/// <summary>
-/// Fixture contendo todos os casos de operações para testes do cálculo de imposto sobre ganho de capital.
-/// </summary>
 public class OperacoesFixture
 {
     // ---------------------- Caso 1 ----------------------

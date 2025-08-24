@@ -7,10 +7,6 @@ using Moq;
 
 namespace UnitTests.CLI;
 
-/// <summary>
-/// Testes unitários para o caso de uso <see cref="GanhoCapitalCLI"/>.
-/// Cobre construtor, execução de CLI com JSON válido e inválido, e tratamento de exceções.
-/// </summary>
 [Collection("GanhoCapitalCLITests Collection")]
 public class GanhoCapitalCLITests
 {
@@ -30,9 +26,6 @@ public class GanhoCapitalCLITests
         Console.SetError(_consoleError);
     }
 
-    /// <summary>
-    /// Testa se RunCLI processa JSON válido corretamente e imprime o resultado.
-    /// </summary>
     [Fact(DisplayName = "RunCLI deve processar JSON válido e imprimir resultado")]
     public void RunCLI_ComJsonValido_DeveExecutarUseCaseEImprimirResultado()
     {
@@ -66,9 +59,6 @@ public class GanhoCapitalCLITests
         Assert.Contains("Digite a sua próxima operação em formato JSON:", output);
     }
 
-    /// <summary>
-    /// Testa se RunCLI captura JSON inválido e escreve mensagem de erro no Console.Error.
-    /// </summary>
     [Fact(DisplayName = "RunCLI deve tratar JSON inválido")]
     public void RunCLI_ComJsonInvalido_DeveEscreverErro()
     {
@@ -84,9 +74,6 @@ public class GanhoCapitalCLITests
         Assert.Contains("JSON inválido", errorOutput);
     }
 
-    /// <summary>
-    /// Testa se RunCLI captura exceções do use case e escreve mensagem de erro no Console.Error.
-    /// </summary>
     [Fact(DisplayName = "RunCLI deve tratar exceção do use case")]
     public void RunCLI_UseCaseLancaExcecao_DeveEscreverErro()
     {

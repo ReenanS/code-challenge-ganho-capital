@@ -4,9 +4,6 @@ using Domain.Enums;
 
 namespace Domain.Entities;
 
-/// <summary>
-/// Representa uma operação de negociação de ações, que pode ser compra ou venda.
-/// </summary>
 public class Operacao
 {
 
@@ -14,9 +11,6 @@ public class Operacao
     private decimal _precoUnitarioAcao;
     private int _quantidadeAcoesNegociadas;
 
-    /// <summary>
-    /// Se a operação é do tipo compra (Buy) ou venda (Sell).
-    /// </summary>
     [JsonPropertyName("operation")]
     [Required]
     public TipoOperacaoEnum TipoOperacao
@@ -33,10 +27,6 @@ public class Operacao
         }
     }
 
-    /// <summary>
-    /// Preço unitário da ação em moeda com duas casas decimais.
-    /// Deve ser maior ou igual a zero.
-    /// </summary>
     [JsonPropertyName("unit-cost")]
     [Range(0, double.MaxValue, ErrorMessage = "O preço unitário da ação não pode ser menor que 0.")]
     public decimal PrecoUnitarioAcao
@@ -53,10 +43,6 @@ public class Operacao
         }
     }
 
-    /// <summary>
-    /// Quantidade de ações negociadas.
-    /// Deve ser maior ou igual a zero.
-    /// </summary>
     [JsonPropertyName("quantity")]
     [Range(0, int.MaxValue, ErrorMessage = "A quantidade de ações negociadas não pode ser menor que 0.")]
     public int QuantidadeAcoesNegociadas
@@ -73,17 +59,8 @@ public class Operacao
         }
     }
 
-    /// <summary>
-    /// Construtor padrão necessário para deserialização.
-    /// </summary>
     public Operacao() { }
 
-    /// <summary>
-    /// Construtor para inicialização rápida de uma operação.
-    /// </summary>
-    /// <param name="tipoOperacao">Tipo da operação.</param>
-    /// <param name="precoUnitarioAcao">Preço unitário da ação.</param>
-    /// <param name="quantidadeAcoesNegociadas">Quantidade de ações negociadas.</param>
     public Operacao(TipoOperacaoEnum tipoOperacao, decimal precoUnitarioAcao, int quantidadeAcoesNegociadas)
     {
         TipoOperacao = tipoOperacao;
@@ -91,16 +68,8 @@ public class Operacao
         QuantidadeAcoesNegociadas = quantidadeAcoesNegociadas;
     }
 
-    /// <summary>
-    /// Verifica se a operação é do tipo compra.
-    /// </summary>
-    /// <returns>True se for compra; caso contrário, false.</returns>
     public bool EhCompra() => TipoOperacao == TipoOperacaoEnum.Buy;
 
-    /// <summary>
-    /// Verifica se a operação é do tipo venda.
-    /// </summary>
-    /// <returns>True se for venda; caso contrário, false.</returns>
     public bool EhVenda() => TipoOperacao == TipoOperacaoEnum.Sell;
 
 }
