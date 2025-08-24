@@ -142,20 +142,12 @@ O projeto é **dockerizado** para facilitar a execução em qualquer máquina.
 
 ```bash
 docker compose up -d --build
-# ou, se versão antiga:
-docker-compose up -d --build
 ```
 
-3. Rodar a aplicação com arquivo de entrada:
+3. Rodar a aplicação manualmente (input via stdin):
 
 ```bash
-docker run -i ganho-capital-cli < nome_arquivo.txt
-```
-
-4. Rodar a aplicação manualmente (input via stdin):
-
-```bash
-docker run -i ganho-capital-cli
+docker run -i --rm code-challenge-ganho-capital-cli
 ```
 
 ---

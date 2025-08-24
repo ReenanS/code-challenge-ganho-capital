@@ -1,9 +1,9 @@
 version: '2'
 services:
-  ganho-capital-cli:
+  cli:
     build:
       context: .
       dockerfile: src/CLI/Dockerfile
-    container_name: ganho_capital_cli
+    container_name: cli
     stdin_open: true
     tty: true
