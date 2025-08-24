@@ -1,110 +1,82 @@
 # 📘 Projeto: Ganho de Capital
 
-Este projeto tem como objetivo **calcular o imposto a ser pago sobre lucros ou prejuízos de operações no mercado financeiro de ações**, seguindo os princípios de **DDD (Domain-Driven Design)** e **Clean Architecture**, adaptado para execução via **CLI (Command Line Interface)**, sem necessidade de banco de dados ou integrações externas.
-
-Toda a lógica de cálculo de imposto está isolada no **domínio**, garantindo **testabilidade, legibilidade e extensibilidade**.
+Este projeto tem como objetivo **calcular o imposto a ser pago sobre lucros ou prejuízos de operações no mercado financeiro de ações**, seguindo **Clean Architecture**, **DDD**, **SOLID** e **Clean Code**, com execução via **CLI (Command Line Interface)**.
 
 ---
 
-## 🏗️ Estrutura do Projeto
+## Pré-requisitos
 
-```plaintext
-src/
- ├── CLI/                              # Camada CLI
- │    ├── Program.cs                   # Ponto de entrada padrão .NET Core
- │    └── GanhoCapitalCLI.cs           # Recebe operações e retorna resultado via stdin/stdout
- ├── Application/                      # Camada de aplicação (Use Cases)
- │    ├── UseCases/
- │    |     └── ApurarGanhoCapitalUseCase.cs
- │    ├── Interfaces/
- │    |     └── IApurarGanhoCapitalUseCase.cs
- │    └── DependencyInjection.cs       # DI
- ├── Domain/                            # Camada de domínio (Regra de negócio)
- │    ├── Entities/
- │    │     ├── Operacao.cs
- │    │     ├── Portfolio.cs
- │    │     └── ImpostoGanhoCapital.cs
- │    ├── Services/
- │    │     └── CalculoImpostoGanhoCapitalService.cs
- │    ├── Enums/
- │    |     └── TipoOperacaoEnum.cs
- │    ├── Interfaces/
- │    |     └── ICalculoImpostoGanhoCapitalService.cs 
- │    └── DependencyInjection.cs       # DI
-```
+Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
+
+- [.NET 9 SDK](https://dotnet.microsoft.com/download) instalado.
+- Um editor de código, como [Visual Studio](https://visualstudio.microsoft.com/) ou [VS Code](https://code.visualstudio.com/)
+- PowerShell para executar a versão compilada do programa CLI (Command Line Interface), se estiver em um ambiente Windows.
+- Docker caso prefira rodar o projeto em um container, garantindo portabilidade entre diferentes sistemas operacionais. Para instalação siga as instruções dos links:
+   - **Ubuntu:** [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+   - **Mac:** [Install Docker Engine on Mac](https://docs.docker.com/desktop/install/mac-install/)
+   - **Windows:** [Install Docker Engine on Windows](https://docs.docker.com/desktop/install/windows-install/)
 
 ---
 
 ## 📌 Decisões Técnicas e Arquiteturais
 
-1. **Clean Architecture**
+- **Clean Architecture**: separa **Application** e **Domain**, facilitando manutenção, testes e evolução.  
 
-   * Separação clara entre **Application** e **Domain**, sem acoplamento com infraestrutura.
-   * Facilita manutenção, testes e evolução do sistema.
+- **DDD**: entidades e serviços refletem a linguagem do negócio, garantindo regras claras e consistentes.  
 
-2. **DDD (Domain-Driven Design)**
+- **SOLID**: princípios aplicados em toda a arquitetura para manter o código modular, extensível e de fácil manutenção.  
 
-   * Entidades (`Operacao`, `Portfolio`, `ImpostoGanhoCapital`) refletem a linguagem do negócio.
-   * Domain Service (`CalculoImpostoGanhoCapitalService`) encapsula toda a regra de cálculo do imposto.
-   * Enums (`TipoOperacaoEnum`) tornam explícito o tipo de operação.
+- **Responsabilidades bem definidas**: Use Cases orquestram o fluxo, Domain Services aplicam regras e Entities mantêm estado do domínio.  
 
-3. **CLI como interface**
-
-   * Entrada padrão (stdin) para receber operações em JSON.
-   * Saída padrão (stdout) para retornar resultados.
-
-4. **Separação de responsabilidades**
-
-   * **Use Case** (`ApurarGanhoCapitalUseCase`) → orquestra fluxo de operações e resultado.
-   * **Domain Service** → calcula imposto e aplica regras de negócio.
-   * **Entities** → mantêm estado e comportamento do domínio.
-
-5. **Extensibilidade**
-
-   * Novos tipos de operações ou regras podem ser adicionados sem impactar o fluxo existente.
+- **Extensível**: novos tipos de operações ou regras podem ser adicionados sem impactar o fluxo atual.
 
 ---
 
-## ⚙️ Justificativa do Uso de Frameworks/Bibliotecas
+## Uso de Frameworks/Bibliotecas
 
-* **.NET 9**: suporte moderno, testes integrados e produtividade elevada.
-* **xUnit**: criação de testes unitários claros e isolados para Domain Services e Use Cases.
-* Nenhuma biblioteca externa foi usada para cálculo de imposto.
+* **.NET 9**: Utilizado como framework principal para desenvolvimento da aplicação, aproveitando seus recursos de desempenho, segurança e suporte a arquiteturas modernas de software. [Documentação oficial do .NET](https://learn.microsoft.com/dotnet/)
+
+* **xUnit**: Framework de testes unitários adotado para garantir qualidade e confiabilidade do código, seguindo boas práticas de TDD (Test-Driven Development). [Documentação oficial do xUnit](https://xunit.net/)
 
 ---
 
-## 🚀 Como Compilar e Executar
-
-### Pré-requisitos
-
-* [.NET 9 SDK](https://dotnet.microsoft.com/download) instalado.
+## Como Compilar e Executar
 
 ### Compilação
 
-```bash
-# Restaurar dependências
-dotnet restore
+1. Restaurar dependências:
 
-# Compilar a solução
+```bash
+dotnet restore
+```
+
+2. Compilar a solução:
+
+```bash
 dotnet build
 ```
 
 ### Execução
 
+1. Executar via dotnet run
+
 ```bash
-# Executar via dotnet run
 dotnet run --project src/CLI
 ```
 
+2. Se estiver em um ambiente Windows, executar versão compilada na pasta bin/Debug/net9.0
+
 ```bash
-# Executar versão compilada (exemplo no Windows)
 src/CLI/bin/Debug/net9.0/CLI.exe
 ```
 
+3. Se estiver em um ambiente Windows, executar versão compilada na pasta raíz do projeto
+
 ```bash
-# Executar versão compilada na raíz do projeto
 CLI.exe
 ```
+
+## Exemplos de Uso
 
 O programa solicitará operações em formato JSON via stdin e retornará o resultado do cálculo via stdout.
 
@@ -133,89 +105,52 @@ Para encerrar a aplicação, pressione as teclas Ctrl + C no console.
 
 ---
 
-## 🐳 Dockerização
+## Dockerização
 
-O projeto é **dockerizado** para facilitar a execução em qualquer máquina.  
-
-- Um único container (`cli`) executa a aplicação.  
-- Dockerfile configura o ambiente completo do projeto.  
-- Docker Compose simplifica build e execução.
+O projeto foi dockerizado para simplificar a execução em qualquer ambiente.  
+Ele conta com um único container, iniciado via **docker-compose**, e um **Dockerfile** responsável pelas configurações de ambiente.
 
 ### Rodando via Docker
 
-1. Instale o Docker:
-
-   * [Ubuntu](https://docs.docker.com/engine/install/ubuntu/) | [Mac](https://docs.docker.com/engine/install/mac/) | [Windows](https://docs.docker.com/desktop/windows/install/)
-
-2. Build e subir container:
+1. Build e subir container:
 
 ```bash
 docker compose up -d --build
 ```
 
-3. Rodar a aplicação manualmente (input via stdin):
+2. Se estiver em um ambiente Windows, executar programa batch para build e subir container
+
+```bash
+init.services-local.bat
+```
+
+3. Executar a aplicação manualmente (input via stdin):
 
 ```bash
 docker run -i --rm code-challenge-ganho-capital-cli
 ```
 
----
-
-## 🧪 Testes e Cobertura de Código
+4. Caso prefira executar a aplicação utilizando um arquivo, inclua o arquivo na root do projeto em seguida rode os seguintes comandos:
 
 ```bash
-# Executar todos os testes
+docker run -i code-challenge-ganho-capital-cli < input.txt
+```
+
+---
+
+## Testes e Cobertura de Código
+
+### Execução
+
+1. Executar testes em uma determinada solução:
+
+```bash
 dotnet test
 ```
 
-Exemplo de estrutura de testes:
-
-```plaintext
-tests/
-
- ├── Tests.CLI/                             
- │    └── GanhoCapitalCLITests.cs          
- ├── Tests.Application/
- │    ├── UseCases/
- │    |    └── ApurarGanhoCapitalUseCaseTests.cs
- ├    └── DependencyInjectionTests.cs
- ├── Tests.Domain/
- │    ├── Entities/
- │    |    └── OperacaoTests.cs
- │    |    └── PortfolioTests.cs
- │    |    └── ImpostoGanhoCapitalTests.cs 
- │    ├── Services/
- │    |    └── CalculoImpostoGanhoCapitalServiceTests.cs
- ├    └── DependencyInjectionTests.cs
- ├── Tests.Fixtures/
- │    ├── Domain/
- │         ├── Entities/ 
- │                └── OperacoesFixture.cs      
-```
-
-**Cobertura de código:** coletada com **Coverlet**, gerando relatórios.
-
 ---
 
-## 📝 Notas Adicionais
+## 📝 Conclusão
 
-1. **Isolamento do domínio**
-
-   * Nenhum cálculo depende de banco de dados, UI ou APIs externas.
-   * Toda regra de cálculo está centralizada em `CalculoImpostoGanhoCapitalService`.
-
-2. **Testabilidade**
-
-   * Entidades e serviços podem ser testados isoladamente, garantindo alta confiabilidade.
-
-3. **Nomes refletindo a linguagem do negócio**
-
-   * Entidades e enums refletem a linguagem do negócio de ações, garantindo legibilidade e consistência.
-
-4. **Extensibilidade futura**
-
-   * Novos tipos de ativos, impostos ou regras podem ser adicionados sem alterar o fluxo do Use Case.
-
-5. **Legibilidade e manutenção**
-
-   * O projeto segue **DDD + Clean Architecture**, facilitando onboarding e manutenção contínua.
+Durante o desenvolvimento da aplicação, adotei práticas como **Clean Architecture**, alinhada aos princípios de **DDD**, **SOLID** e **Clean Code**. Isso garantiu uma separação clara de responsabilidades, deixando o projeto simples de entender, e flexivel para evoluções futuras.  
+Por fim, priorizei a **qualidade** com testes bem escritos, cobrindo a aplicação ponta a ponta para garantir robustez e sustentabilidade.
