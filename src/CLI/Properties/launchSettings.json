@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GanhoCapital": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
