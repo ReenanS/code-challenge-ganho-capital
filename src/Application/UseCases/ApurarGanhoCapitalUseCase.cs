@@ -40,7 +40,7 @@ public class ApurarGanhoCapitalUseCase : IApurarGanhoCapitalUseCase
 
         var portfolio = new Portfolio();
 
-        foreach (var operacao in operacoes)
+        foreach (Operacao operacao in operacoes)
         {
             resultado.Add(_service.Calcular(operacao, portfolio));
         }

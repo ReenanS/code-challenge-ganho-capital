@@ -2,18 +2,19 @@
 
 # Esta fase é usada durante a execução no VS no modo rápido (Padrão para a configuração de Depuração)
 FROM mcr.microsoft.com/dotnet/runtime:9.0 AS base
-USER $APP_UID
 WORKDIR /app
-
 
 # Esta fase é usada para compilar o projeto de serviço
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["CLI.csproj", "."]
-RUN dotnet restore "./CLI.csproj"
+COPY ["src/CLI/CLI.csproj", "src/CLI/"]
+COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
+COPY ["src/Application/Application.csproj", "src/Application/"]
+COPY ["src/Domain/Domain.csproj", "src/Domain/"]
+RUN dotnet restore "./src/CLI/CLI.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/src/CLI"
 RUN dotnet build "./CLI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Esta fase é usada para publicar o projeto de serviço a ser copiado para a fase final

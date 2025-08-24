@@ -26,7 +26,7 @@ public class CalculoImpostoGanhoCapitalServiceTests
         var operacao = new Operacao(TipoOperacaoEnum.Buy, 10m, 100);
         var portfolio = new Portfolio();
 
-        var resultado = _service.Calcular(operacao, portfolio);
+        ImpostoGanhoCapital resultado = _service.Calcular(operacao, portfolio);
 
         Assert.Equal(0m, resultado.Valor);
         Assert.Equal(100, portfolio.QuantidadeAcoesAtual);
@@ -44,7 +44,7 @@ public class CalculoImpostoGanhoCapitalServiceTests
 
         for (int i = 0; i < operacoes.Count; i++)
         {
-            var resultado = _service.Calcular(operacoes[i], portfolio);
+            ImpostoGanhoCapital resultado = _service.Calcular(operacoes[i], portfolio);
 
             Assert.Equal(resultadoEsperado[i], resultado.Valor);
         }

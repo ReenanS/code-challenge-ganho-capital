@@ -1,7 +1,5 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
-using System;
-using Xunit;
 
 namespace Domain.Tests.Entities;
 
@@ -18,7 +16,7 @@ public class OperacaoTests
     {
         var operacao = new Operacao();
 
-        Assert.Equal(default(TipoOperacaoEnum), operacao.TipoOperacao);
+        Assert.Equal(default, operacao.TipoOperacao);
         Assert.Equal(0m, operacao.PrecoUnitarioAcao);
         Assert.Equal(0, operacao.QuantidadeAcoesNegociadas);
     }
@@ -52,7 +50,7 @@ public class OperacaoTests
     {
         var operacao = new Operacao();
 
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+        ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             operacao.PrecoUnitarioAcao = precoNegativo;
         });
@@ -67,7 +65,7 @@ public class OperacaoTests
     {
         var operacao = new Operacao();
 
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+        ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             operacao.QuantidadeAcoesNegociadas = quantidadeNegativa;
         });
@@ -81,7 +79,7 @@ public class OperacaoTests
         var operacao = new Operacao();
         var valorInvalido = (TipoOperacaoEnum)999;
 
-        var ex = Assert.Throws<ArgumentException>(() =>
+        ArgumentException ex = Assert.Throws<ArgumentException>(() =>
         {
             operacao.TipoOperacao = valorInvalido;
         });

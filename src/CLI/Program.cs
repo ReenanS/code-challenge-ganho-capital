@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CLI;
 
-class Program
+internal class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         var services = new ServiceCollection();
 
@@ -17,10 +17,10 @@ class Program
         // Registrar o CLI
         services.AddSingleton<GanhoCapitalCLI>();
 
-        var serviceProvider = services.BuildServiceProvider();
+        ServiceProvider serviceProvider = services.BuildServiceProvider();
 
         // Resolver e executar o CLI
-        var cli = serviceProvider.GetRequiredService<GanhoCapitalCLI>();
+        GanhoCapitalCLI cli = serviceProvider.GetRequiredService<GanhoCapitalCLI>();
         cli.RunCLI();
     }
 }

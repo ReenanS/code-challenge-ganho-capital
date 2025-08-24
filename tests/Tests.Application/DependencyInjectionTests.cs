@@ -28,11 +28,11 @@ public class DependencyInjectionTests
         services.AddSingleton(mockService.Object);
 
         // Act
-        var returnedServices = services.AddApplicationServices();
-        var provider = returnedServices.BuildServiceProvider();
+        IServiceCollection returnedServices = services.AddApplicationServices();
+        ServiceProvider provider = returnedServices.BuildServiceProvider();
 
         // Assert
-        var apurarGanhoCapitalService = provider.GetService<IApurarGanhoCapitalUseCase>();
+        IApurarGanhoCapitalUseCase apurarGanhoCapitalService = provider.GetService<IApurarGanhoCapitalUseCase>();
         Assert.NotNull(apurarGanhoCapitalService);
         Assert.IsType<ApurarGanhoCapitalUseCase>(apurarGanhoCapitalService);
     }

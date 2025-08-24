@@ -40,8 +40,8 @@ public class Portfolio
     /// <param name="operacao">Operação de compra a ser aplicada.</param>
     public void AplicarCompra(Operacao operacao)
     {
-        PrecoMedioPonderado = ((QuantidadeAcoesAtual * PrecoMedioPonderado) +
-                                (operacao.QuantidadeAcoesNegociadas * operacao.PrecoUnitarioAcao)) /
+        PrecoMedioPonderado = (QuantidadeAcoesAtual * PrecoMedioPonderado +
+                                operacao.QuantidadeAcoesNegociadas * operacao.PrecoUnitarioAcao) /
                                (QuantidadeAcoesAtual + operacao.QuantidadeAcoesNegociadas);
 
         QuantidadeAcoesAtual += operacao.QuantidadeAcoesNegociadas;

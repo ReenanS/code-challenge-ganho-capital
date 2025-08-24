@@ -1,7 +1,7 @@
-﻿using Application.UseCases;
+﻿using System.Text.Json;
+using Application.UseCases;
 using Domain.Entities;
 using Moq;
-using System.Text.Json;
 
 namespace CLI.Tests;
 

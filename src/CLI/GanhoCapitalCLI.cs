@@ -1,7 +1,7 @@
-﻿using Application.UseCases;
-using Domain.Entities;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Application.UseCases;
+using Domain.Entities;
 
 namespace CLI;
 
@@ -53,7 +53,7 @@ public class GanhoCapitalCLI
 
             try
             {
-                var resultado = _apurarGanhoCapitalUseCase.Execute(operacoes!);
+                IEnumerable<ImpostoGanhoCapital> resultado = _apurarGanhoCapitalUseCase.Execute(operacoes!);
 
                 string res = JsonSerializer.Serialize(resultado, new JsonSerializerOptions
                 {

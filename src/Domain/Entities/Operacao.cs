@@ -1,6 +1,6 @@
-﻿using Domain.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Domain.Enums;
 
 namespace Domain.Entities;
 
@@ -25,7 +25,9 @@ public class Operacao
         set
         {
             if (!Enum.IsDefined(typeof(TipoOperacaoEnum), value))
+            {
                 throw new ArgumentException($"Tipo de operação inválido: {value}. Apenas 'Buy' ou 'Sell' são aceitos.");
+            }
 
             _tipoOperacao = value;
         }
@@ -43,7 +45,9 @@ public class Operacao
         set
         {
             if (value < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(PrecoUnitarioAcao), value, "O preço unitário da ação não pode ser menor que 0.");
+            }
 
             _precoUnitarioAcao = value;
         }
@@ -61,7 +65,9 @@ public class Operacao
         set
         {
             if (value < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(QuantidadeAcoesNegociadas), value, "A quantidade de ações negociadas não pode ser menor que 0.");
+            }
 
             _quantidadeAcoesNegociadas = value;
         }

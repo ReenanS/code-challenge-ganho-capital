@@ -21,11 +21,11 @@ public class DependencyInjectionTests
         var services = new ServiceCollection();
 
         // Act
-        var returnedServices = services.AddDomainServices();
-        var provider = returnedServices.BuildServiceProvider();
+        IServiceCollection returnedServices = services.AddDomainServices();
+        ServiceProvider provider = returnedServices.BuildServiceProvider();
 
         // Assert
-        var calculoService = provider.GetService<ICalculoImpostoGanhoCapitalService>();
+        ICalculoImpostoGanhoCapitalService calculoService = provider.GetService<ICalculoImpostoGanhoCapitalService>();
         Assert.NotNull(calculoService);
         Assert.IsType<CalculoImpostoGanhoCapitalService>(calculoService);
     }

@@ -47,7 +47,9 @@ public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalServ
 
         // Isenção para operações de valor total <= 20.000
         if (valorTotalOperacao <= 20000.00m)
+        {
             return new ImpostoGanhoCapital(0.00m);
+        }
 
         // Calcula lucro acumulado após compensar prejuízos acumulados
         decimal lucroAcumulado = lucroOperacao - portfolio.PrejuizoAcumulado;

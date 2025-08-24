@@ -2,8 +2,6 @@
 using Domain.Entities;
 using Domain.Services;
 using Moq;
-using System.Collections.Generic;
-using Xunit;
 
 namespace CLI.Tests;
 
@@ -32,7 +30,7 @@ public class ApurarGanhoCapitalUseCaseTests
         var operacoes = new List<Operacao>();
 
         // Act
-        var resultado = useCase.Execute(operacoes);
+        IEnumerable<ImpostoGanhoCapital> resultado = useCase.Execute(operacoes);
 
         // Assert
         Assert.NotNull(resultado);
@@ -56,7 +54,7 @@ public class ApurarGanhoCapitalUseCaseTests
                     .Returns<Operacao, Portfolio>((op, p) => new ImpostoGanhoCapital(preco * quantidade));
 
         // Act
-        var resultado = useCase.Execute(operacoes);
+        IEnumerable<ImpostoGanhoCapital> resultado = useCase.Execute(operacoes);
         var lista = new List<ImpostoGanhoCapital>(resultado);
 
         // Assert
