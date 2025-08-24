@@ -16,6 +16,7 @@ src/
  ├── Application/                      # Camada de aplicação (Use Cases)
  │    ├── UseCases/
  │    |     └── ApurarGanhoCapitalUseCase.cs
+ │    ├── Interfaces/
  │    |     └── IApurarGanhoCapitalUseCase.cs
  │    └── DependencyInjection.cs       # DI
  ├── Domain/                            # Camada de domínio (Regra de negócio)
@@ -24,10 +25,11 @@ src/
  │    │     ├── Portfolio.cs
  │    │     └── ImpostoGanhoCapital.cs
  │    ├── Services/
- │    │     ├── CalculoImpostoGanhoCapitalService.cs
- │    │     └── ICalculoImpostoGanhoCapitalService.cs
+ │    │     └── CalculoImpostoGanhoCapitalService.cs
  │    ├── Enums/
  │    |     └── TipoOperacaoEnum.cs
+ │    ├── Interfaces/
+ │    |     └── ICalculoImpostoGanhoCapitalService.cs 
  │    └── DependencyInjection.cs       # DI
 ```
 
