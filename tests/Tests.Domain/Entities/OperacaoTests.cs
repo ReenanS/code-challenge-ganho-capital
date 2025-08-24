@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 
-namespace Domain.Tests.Entities;
+namespace Tests.Domain.Entities;
 
 /// <summary>
 /// Testes unitários enxutos para a classe <see cref="Operacao"/>.

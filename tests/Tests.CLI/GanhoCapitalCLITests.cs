@@ -1,9 +1,10 @@
 ﻿using System.Text.Json;
 using Application.UseCases;
+using CLI;
 using Domain.Entities;
 using Moq;
 
-namespace CLI.Tests;
+namespace Tests.CLI;
 
 /// <summary>
 /// Testes unitários para o caso de uso <see cref="GanhoCapitalCLI"/>.

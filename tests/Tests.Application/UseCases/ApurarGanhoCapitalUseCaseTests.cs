@@ -3,7 +3,7 @@ using Domain.Entities;
 using Domain.Services;
 using Moq;
 
-namespace CLI.Tests;
+namespace Tests.Application.UseCases;
 
 /// <summary>
 /// Testes unitários para o caso de uso <see cref="ApurarGanhoCapitalUseCase"/>.

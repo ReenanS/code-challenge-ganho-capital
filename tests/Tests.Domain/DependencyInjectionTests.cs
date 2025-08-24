@@ -1,7 +1,8 @@
-﻿using Domain.Services;
+﻿using Domain;
+using Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Domain.Tests;
+namespace Tests.Domain;
 
 /// <summary>
 /// Testes unitários para a classe de extensão <see cref="DependencyInjection"/>.
