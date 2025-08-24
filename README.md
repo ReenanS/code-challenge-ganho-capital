@@ -131,13 +131,49 @@ docker run -i code-challenge-ganho-capital-cli < input.txt
 
 ## Testes e Cobertura de Código
 
-### Execução
+#### Execução dos Testes Unitários
 
-1. Executar testes em uma determinada solução:
+1. Acesse a pasta dos testes unitários:
+
+```bash
+cd src/tests/UnitTests
+```
+
+2. Executar testes em uma determinada solução:
 
 ```bash
 dotnet test
 ```
+
+#### Testes Unitários com Cobertura de Código
+
+1. Acesse a pasta dos testes unitários:
+
+```bash
+cd src/tests/UnitTests
+```
+
+2. Execute os testes e colete a cobertura de código:
+
+```bash
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+3. Instale a ferramenta ReportGenerator para gerar relatórios HTML:
+
+```bash
+dotnet tool install -g dotnet-reportgenerator-globaltool
+```
+
+4. Note que foi criada a pasta `TestResults` dentro de `src/tests/UnitTests`. Dentro dela, há uma subpasta com um GUID gerado automaticamente. Identifique esse GUID e execute o comando abaixo para gerar o relatório HTML:
+
+```bash
+reportgenerator -reports:"Path\Para\UnitTests\TestResults\{guid}\coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
+```
+
+5. Abra o relatório gerado:
+- Navegue até a pasta `src/tests/UnitTests/coveragereport`
+- Abra o arquivo `index.html` para visualizar a cobertura de código da aplicação.
 
 ---
 
