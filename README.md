@@ -124,6 +124,42 @@ Para encerrar a aplicação, pressione as teclas Ctrl + C no console.
 
 ---
 
+## 🐳 Dockerização
+
+O projeto é **dockerizado** para facilitar a execução em qualquer máquina.  
+
+- Um único container (`cli`) executa a aplicação.  
+- Dockerfile configura o ambiente completo do projeto.  
+- Docker Compose simplifica build e execução.
+
+### Rodando via Docker
+
+1. Instale o Docker:
+
+   * [Ubuntu](https://docs.docker.com/engine/install/ubuntu/) | [Mac](https://docs.docker.com/engine/install/mac/) | [Windows](https://docs.docker.com/desktop/windows/install/)
+
+2. Build e subir container:
+
+```bash
+docker compose up -d --build
+# ou, se versão antiga:
+docker-compose up -d --build
+```
+
+3. Rodar a aplicação com arquivo de entrada:
+
+```bash
+docker run -i ganho-capital-cli < nome_arquivo.txt
+```
+
+4. Rodar a aplicação manualmente (input via stdin):
+
+```bash
+docker run -i ganho-capital-cli
+```
+
+---
+
 ## 🧪 Testes e Cobertura de Código
 
 ```bash
