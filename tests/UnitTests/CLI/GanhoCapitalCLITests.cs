@@ -2,9 +2,10 @@
 using Application.Interfaces;
 using CLI;
 using Domain.Entities;
+using Domain.Enums;
 using Moq;
 
-namespace Tests.CLI;
+namespace UnitTests.CLI;
 
 /// <summary>
 /// Testes unitários para o caso de uso <see cref="GanhoCapitalCLI"/>.
@@ -38,8 +39,8 @@ public class GanhoCapitalCLITests
         // Arrange
         var operacoes = new List<Operacao>
         {
-            new Operacao(Domain.Enums.TipoOperacaoEnum.Buy, 10m, 5),
-            new Operacao(Domain.Enums.TipoOperacaoEnum.Sell, 20m, 4)
+            new Operacao(TipoOperacaoEnum.Buy, 10m, 5),
+            new Operacao(TipoOperacaoEnum.Sell, 20m, 4)
         };
 
         _mockUseCase.Setup(x => x.Execute(It.IsAny<List<Operacao>>()))

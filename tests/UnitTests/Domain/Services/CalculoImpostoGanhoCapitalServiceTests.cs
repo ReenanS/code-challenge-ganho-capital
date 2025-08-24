@@ -3,7 +3,7 @@ using Domain.Enums;
 using Domain.Services;
 using Tests.Fixtures.Domain.Entities;
 
-namespace Tests.Domain.Services;
+namespace UnitTests.Domain.Services;
 
 /// <summary>
 /// Testes unitários para a classe <see cref="CalculoImpostoGanhoCapitalService"/> 

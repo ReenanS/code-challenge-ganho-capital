@@ -3,7 +3,7 @@ using Domain.Interfaces;
 using Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Tests.Domain;
+namespace UnitTests.Domain;
 
 /// <summary>
 /// Testes unitários para a classe de extensão <see cref="DependencyInjection"/>.

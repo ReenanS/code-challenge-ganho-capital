@@ -5,7 +5,7 @@ using Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace Tests.Application;
+namespace UnitTests.Application;
 
 /// <summary>
 /// Testes unitários para a classe de extensão <see cref="DependencyInjection"/>.

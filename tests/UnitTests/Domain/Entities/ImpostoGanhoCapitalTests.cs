@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Tests.Domain.Entities;
+namespace UnitTests.Domain.Entities;
 
 /// <summary>
 /// Testes unitários para a classe <see cref="ImpostoGanhoCapital"/>.
