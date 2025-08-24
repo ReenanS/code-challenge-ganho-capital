@@ -92,9 +92,16 @@ dotnet build
 ```bash
 # Executar via dotnet run
 dotnet run --project src/CLI
+```
 
+```bash
 # Executar versão compilada (exemplo no Windows)
 src/CLI/bin/Debug/net9.0/CLI.exe
+```
+
+```bash
+# Executar versão compilada na raíz do projeto
+CLI.exe
 ```
 
 O programa solicitará operações em formato JSON via stdin e retornará o resultado do cálculo via stdout.
