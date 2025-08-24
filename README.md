@@ -23,11 +23,9 @@ src/
  │    │     ├── Operacao.cs
  │    │     ├── Portfolio.cs
  │    │     └── ImpostoGanhoCapital.cs
- │    │
  │    ├── Services/
  │    │     ├── CalculoImpostoGanhoCapitalService.cs
  │    │     └── ICalculoImpostoGanhoCapitalService.cs
- │    │
  │    ├── Enums/
  │    |     └── TipoOperacaoEnum.cs
  │    └── DependencyInjection.cs       # DI
@@ -104,22 +102,25 @@ O programa solicitará operações em formato JSON via stdin e retornará o resu
 Exemplo de entrada:
 
 ```json
- [{"operation": "buy", "unit-cost": 5000.00, "quantity": 10}, 
-{"operation": "sell", "unit-cost": 4000.00, "quantity": 5},
- {"operation": "buy", "unit-cost": 15000.00, "quantity": 5},
- {"operation": "buy", "unit-cost": 4000.00, "quantity": 2},
- {"operation": "buy", "unit-cost": 23000.00, "quantity": 2},
- {"operation": "sell", "unit-cost": 20000.00, "quantity": 1},
- {"operation": "sell", "unit-cost": 12000.00, "quantity": 10},
- {"operation": "sell", "unit-cost": 15000.00, "quantity": 3}]
+[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},
+ {"operation":"sell", "unit-cost":2.00, "quantity": 5000},
+ {"operation":"sell", "unit-cost":20.00, "quantity": 2000},
+ {"operation":"sell", "unit-cost":20.00, "quantity": 2000},
+ {"operation":"sell", "unit-cost":25.00, "quantity": 1000},
+ {"operation":"buy", "unit-cost":20.00, "quantity": 10000},
+ {"operation":"sell", "unit-cost":15.00, "quantity": 5000},
+ {"operation":"sell", "unit-cost":30.00, "quantity": 4350},
+ {"operation":"sell", "unit-cost":30.00, "quantity": 650}]
 ```
 
 Exemplo de saída:
 
 ```json
-[{"tax": 0.0},{"tax": 0.0},{"tax": 0.0},{"tax": 0.0},{"tax": 0.0},
- {"tax": 0.0},{"tax": 1000.0},{"tax": 2400.0}]]
+ [{"tax": 0.0},{"tax": 0.0},{"tax": 0.0},{"tax": 0.0},{"tax": 3000.0},
+ {"tax": 0.0},{"tax": 0.0},{"tax": 3700.0},{"tax": 0.0}]
 ```
+
+Para encerrar a aplicação, pressione as teclas Ctrl + C no console.
 
 ---
 
@@ -155,7 +156,7 @@ tests/
  │                └── OperacoesFixture.cs      
 ```
 
-**Cobertura de código:** coletada com **Coverlet**, gerando relatórios no formato **Cobertura** para integração com pipelines de CI/CD.
+**Cobertura de código:** coletada com **Coverlet**, gerando relatórios.
 
 ---
 
@@ -180,4 +181,4 @@ tests/
 
 5. **Legibilidade e manutenção**
 
-   * O projeto segue **DDD + Clean Architecture**, adaptado para CLI, facilitando onboarding e manutenção contínua.
+   * O projeto segue **DDD + Clean Architecture**, facilitando onboarding e manutenção contínua.
