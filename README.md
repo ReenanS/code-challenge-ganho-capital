@@ -83,22 +83,13 @@ O programa solicitará operações em formato JSON via stdin e retornará o resu
 Exemplo de entrada:
 
 ```json
-[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},
- {"operation":"sell", "unit-cost":2.00, "quantity": 5000},
- {"operation":"sell", "unit-cost":20.00, "quantity": 2000},
- {"operation":"sell", "unit-cost":20.00, "quantity": 2000},
- {"operation":"sell", "unit-cost":25.00, "quantity": 1000},
- {"operation":"buy", "unit-cost":20.00, "quantity": 10000},
- {"operation":"sell", "unit-cost":15.00, "quantity": 5000},
- {"operation":"sell", "unit-cost":30.00, "quantity": 4350},
- {"operation":"sell", "unit-cost":30.00, "quantity": 650}]
+[{"operation":"buy", "unit-cost":10.00, "quantity": 10000}, {"operation":"sell", "unit-cost":2.00, "quantity": 5000}, {"operation":"sell", "unit-cost":20.00, "quantity": 2000}, {"operation":"sell", "unit-cost":20.00, "quantity": 2000}, {"operation":"sell", "unit-cost":25.00, "quantity": 1000}, {"operation":"buy", "unit-cost":20.00, "quantity": 10000}, {"operation":"sell", "unit-cost":15.00, "quantity": 5000}, {"operation":"sell", "unit-cost":30.00, "quantity": 4350}, {"operation":"sell", "unit-cost":30.00, "quantity": 650}]
 ```
 
 Exemplo de saída:
 
 ```json
- [{"tax": 0.0},{"tax": 0.0},{"tax": 0.0},{"tax": 0.0},{"tax": 3000.0},
- {"tax": 0.0},{"tax": 0.0},{"tax": 3700.0},{"tax": 0.0}]
+[{"tax":0.00},{"tax":0.00},{"tax":0.00},{"tax":0.00},{"tax":3000.00},{"tax":0.00},{"tax":0.00},{"tax":3700.00},{"tax":0.00}]
 ```
 
 Para encerrar a aplicação, pressione as teclas Ctrl + C no console.
