@@ -47,13 +47,13 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 1. Restaurar dependências:
 
 ```bash
-dotnet restore
+dotnet restore GanhoCapital.sln
 ```
 
 2. Compilar a solução:
 
 ```bash
-dotnet build
+dotnet build GanhoCapital.sln
 ```
 
 ### Execução
