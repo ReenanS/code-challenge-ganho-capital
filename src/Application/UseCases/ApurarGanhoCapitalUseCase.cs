@@ -25,13 +25,8 @@ public class ApurarGanhoCapitalUseCase : IApurarGanhoCapitalUseCase
     /// <returns>
     /// Uma coleção de <see cref="ImpostoGanhoCapital"/> com os valores calculados para cada operação.
     /// </returns>
-    /// <exception cref="ArgumentNullException">Se <paramref name="operacoes"/> for nulo.</exception>
     public IEnumerable<ImpostoGanhoCapital> Execute(IEnumerable<Operacao> operacoes)
     {
-        if (operacoes is null)
-        {
-            throw new ArgumentNullException(nameof(operacoes));
-        }
 
         var portfolio = new Portfolio();
 

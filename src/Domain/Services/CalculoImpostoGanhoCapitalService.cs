@@ -13,17 +13,13 @@ public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalServ
 
     public ImpostoGanhoCapital Calcular(Operacao operacao, Portfolio portfolio)
     {
-        if (operacao.EhCompra())
+        return operacao switch
         {
-            return ProcessarCompra(operacao, portfolio);
-        }
-
-        if (operacao.EhVenda())
-        {
-            return ProcessarVenda(operacao, portfolio);
-        }
-
-        throw new InvalidOperationException($"Tipo de operação inválido: {operacao.TipoOperacao}");
+            _ when operacao.EhCompra() => ProcessarCompra(operacao, portfolio),
+            _ when operacao.EhVenda() => ProcessarVenda(operacao, portfolio),
+            _ => throw new InvalidOperationException(
+                $"Tipo de operação inválido para cálculo de imposto: {operacao.TipoOperacao}")
+        };
 
     }
 
