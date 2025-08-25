@@ -3,11 +3,8 @@ using Domain.Enums;
 using Domain.Services;
 using Tests.Fixtures.Domain.Entities;
 
-namespace Tests.Domain.Services;
+namespace UnitTests.Domain.Services;
 
-/// <summary>
-/// Testes unitários para a classe <see cref="CalculoImpostoGanhoCapitalService"/> 
-/// </summary>
 public class CalculoImpostoGanhoCapitalServiceTests
 {
     private readonly CalculoImpostoGanhoCapitalService _service;
@@ -17,9 +14,6 @@ public class CalculoImpostoGanhoCapitalServiceTests
         _service = new CalculoImpostoGanhoCapitalService();
     }
 
-    /// <summary>
-    /// Deve retornar imposto zero quando a operação é de compra.
-    /// </summary>
     [Fact(DisplayName = "Operação de compra retorna imposto zero")]
     public void Calcular_DeveRetornarZero_QuandoOperacaoEhCompra()
     {
@@ -32,9 +26,6 @@ public class CalculoImpostoGanhoCapitalServiceTests
         Assert.Equal(100, portfolio.QuantidadeAcoesAtual);
     }
 
-    /// <summary>
-    /// Testa diferentes cenários de operações de venda representativos.
-    /// </summary>
     [Theory(DisplayName = "Operações de venda devem calcular imposto corretamente")]
     [MemberData(nameof(GetCasosOperacoes))]
     public void Calcular_DeveCalcularImposto_CasosDefinidos(List<Operacao> operacoes, decimal[] resultadoEsperado)
@@ -50,10 +41,6 @@ public class CalculoImpostoGanhoCapitalServiceTests
         }
     }
 
-    /// <summary>
-    /// Fornece casos representativos para testes parametrizados.
-    /// Inclui diferentes cenários de venda, prejuízo e quantidade.
-    /// </summary>
     public static IEnumerable<object[]> GetCasosOperacoes()
     {
         var fixture = new OperacoesFixture();

@@ -1,12 +1,8 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 
-namespace Tests.Domain.Entities;
+namespace UnitTests.Domain.Entities;
 
-/// <summary>
-/// Testes unitários enxutos para a classe <see cref="Operacao"/>.
-/// Cobre criação de instâncias, métodos EhCompra/EhVenda e validações de domínio.
-/// </summary>
 [Collection("OperacaoTests Collection")]
 public class OperacaoTests
 {

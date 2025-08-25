@@ -5,25 +5,15 @@ using Domain.Entities;
 
 namespace CLI;
 
-/// <summary>
-/// Classe responsável por rodar o CLI de apuração de ganhos de capital.
-/// </summary>
 public class GanhoCapitalCLI
 {
     private readonly IApurarGanhoCapitalUseCase _apurarGanhoCapitalUseCase;
 
-    /// <summary>
-    /// Construtor que injeta a dependência do caso de uso.
-    /// </summary>
-    /// <param name="apurarGanhoCapitalUseCase">Use case para apuração de ganho de capital.</param>
     public GanhoCapitalCLI(IApurarGanhoCapitalUseCase apurarGanhoCapitalUseCase)
     {
         _apurarGanhoCapitalUseCase = apurarGanhoCapitalUseCase ?? throw new ArgumentNullException(nameof(apurarGanhoCapitalUseCase));
     }
 
-    /// <summary>
-    /// Método que executa o CLI, lendo operações do console, processando e exibindo resultados.
-    /// </summary>
     public void RunCLI()
     {
         Console.WriteLine("Seja bem-vindo ao Code Challenge: Ganho de Capital\n");

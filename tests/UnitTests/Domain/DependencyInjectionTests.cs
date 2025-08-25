@@ -3,19 +3,12 @@ using Domain.Interfaces;
 using Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Tests.Domain;
+namespace UnitTests.Domain;
 
-/// <summary>
-/// Testes unitários para a classe de extensão <see cref="DependencyInjection"/>.
-/// Cobre registro de serviços no container de DI.
-/// </summary>
 [Collection("DependencyInjectionTests Collection")]
 public class DependencyInjectionTests
 {
 
-    /// <summary>
-    /// Verifica que todos os serviços esperados estão registrados corretamente.
-    /// </summary>
     [Fact(DisplayName = "Verificação de registros adicionais deve passar caso novos serviços sejam adicionados")]
     public void AddDomainServices_RegistroDeServicos_Futuro()
     {

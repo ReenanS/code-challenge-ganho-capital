@@ -1,12 +1,8 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 
-namespace Tests.Domain.Entities;
+namespace UnitTests.Domain.Entities;
 
-/// <summary>
-/// Testes unitários enxutos para a classe <see cref="Portfolio"/>.
-/// Cobre criação de instâncias, operações de compra, manipulação de prejuízos e quantidade de ações.
-/// </summary>
 [Collection("PortfolioTests Collection")]
 public class PortfolioTests
 {
