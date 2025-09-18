@@ -4,5 +4,5 @@ namespace Application.Interfaces;
 
 public interface IApurarGanhoCapitalUseCase
 {
-    IEnumerable<ImpostoGanhoCapital> Execute(IEnumerable<Operacao> operacoes);
+    IEnumerable<ResultadoOperacao> Execute(IEnumerable<Operacao> operacoes);
 }

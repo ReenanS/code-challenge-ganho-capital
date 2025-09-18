@@ -13,7 +13,7 @@ public class ApurarGanhoCapitalUseCase : IApurarGanhoCapitalUseCase
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
-    public IEnumerable<ImpostoGanhoCapital> Execute(IEnumerable<Operacao> operacoes)
+    public IEnumerable<ResultadoOperacao> Execute(IEnumerable<Operacao> operacoes)
     {
 
         var portfolio = new Portfolio();

@@ -43,9 +43,28 @@ public class GanhoCapitalCLI
 
             try
             {
-                IEnumerable<ImpostoGanhoCapital> resultado = _apurarGanhoCapitalUseCase.Execute(operacoes!);
+                IEnumerable<ResultadoOperacao> resultados = _apurarGanhoCapitalUseCase.Execute(operacoes!);
 
-                string res = JsonSerializer.Serialize(resultado, new JsonSerializerOptions
+                // 🔥 Aqui convertemos para o formato correto
+                IEnumerable<Dictionary<string, object>> output = resultados.Select(r =>
+                    r switch
+                    {
+                        ImpostoGanhoCapital imposto => new Dictionary<string, object>
+                        {
+                            ["tax"] = Math.Round(imposto.Valor, 2)
+                        },
+                        ErroOperacao erro => new Dictionary<string, object>
+                        {
+                            ["error"] = erro.Mensagem
+                        },
+                        _ => new Dictionary<string, object>
+                        {
+                            ["error"] = "Resultado desconhecido"
+                        }
+                    });
+
+
+                string res = JsonSerializer.Serialize(output, new JsonSerializerOptions
                 {
                     WriteIndented = false
                 });

@@ -11,7 +11,7 @@ public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalServ
     private const decimal LIMITE_ISENCAO = 20000.00m;
     private const decimal ALIQUOTA_IMPOSTO = 0.20m;
 
-    public ImpostoGanhoCapital Calcular(Operacao operacao, Portfolio portfolio)
+    public ResultadoOperacao Calcular(Operacao operacao, Portfolio portfolio)
     {
         return operacao switch
         {
@@ -23,14 +23,20 @@ public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalServ
 
     }
 
-    private ImpostoGanhoCapital ProcessarCompra(Operacao operacao, Portfolio portfolio)
+    private ResultadoOperacao ProcessarCompra(Operacao operacao, Portfolio portfolio)
     {
         portfolio.AplicarCompra(operacao);
         return new ImpostoGanhoCapital(0.00m);
     }
 
-    private ImpostoGanhoCapital ProcessarVenda(Operacao operacao, Portfolio portfolio)
+    private ResultadoOperacao ProcessarVenda(Operacao operacao, Portfolio portfolio)
     {
+
+        if (operacao.QuantidadeAcoesNegociadas > portfolio.QuantidadeAcoesAtual)
+        {
+            return new ErroOperacao("Cant sell more stocks than you have");
+        }
+
         decimal valorTotalOperacao = CalcularValorTotalOperacao(operacao);
         decimal lucroOperacao = CalcularLucroOperacao(operacao, portfolio);
 
@@ -65,13 +71,13 @@ public class CalculoImpostoGanhoCapitalService : ICalculoImpostoGanhoCapitalServ
     private decimal CalcularLucroOperacao(Operacao operacao, Portfolio portfolio)
         => (operacao.PrecoUnitarioAcao - portfolio.PrecoMedioPonderado) * operacao.QuantidadeAcoesNegociadas;
 
-    private ImpostoGanhoCapital RegistrarPrejuizo(decimal lucroOperacao, Portfolio portfolio)
+    private ResultadoOperacao RegistrarPrejuizo(decimal lucroOperacao, Portfolio portfolio)
     {
         portfolio.RegistrarPrejuizo(Math.Abs(lucroOperacao));
         return new ImpostoGanhoCapital(0.00m);
     }
 
-    private ImpostoGanhoCapital CompensarPrejuizo(decimal lucroOperacao, Portfolio portfolio)
+    private ResultadoOperacao CompensarPrejuizo(decimal lucroOperacao, Portfolio portfolio)
     {
         portfolio.DeduzirPrejuizo(lucroOperacao);
         return new ImpostoGanhoCapital(0.00m);
